@@ -5,3 +5,8 @@ typedef struct framebuffer_s {
     unsigned int width;
     unsigned int height;
 } framebuffer_t;
+
+struct main_window {
+    sfRenderWindow *window;
+    
+};
