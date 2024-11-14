@@ -4,6 +4,7 @@
 #include "include/my_hunter.h"
 #define WIDTH 1920
 #define HEIGTH 1080
+#define NAME "KFC HUNTER"
 
 sfRenderWindow *create_window(unsigned int width, unsigned int heigth, char *window_title)
 {
@@ -17,36 +18,13 @@ sfRenderWindow *create_window(unsigned int width, unsigned int heigth, char *win
     return window;
 }
 
-void manage_mouse_click(sfMouseButtonEvent event)
-{
-    printf("Mouse x=%d y=%d\n", event.x, event.y);
-}
-
-void analyse_events(sfRenderWindow *window, sfEvent event)
-{
-    while (sfRenderWindow_pollEvent(window, &event)) {
-        if (event.type == sfEvtClosed) {
-            sfRenderWindow_close(window);
-        }
-        if (event.type == sfEvtMouseButtonPressed) {
-            manage_mouse_click(event.mouseButton);
-        }
-    }
-}
-
-void move_rect(sfIntRect *rect, int offset, int max_value)
-{
-    rect->left += offset;
-    if (rect->left >= max_value)
-        rect->left = 0;
-}
-
 int main(void)
 {
-    sfRenderWindow *window = create_window(WIDTH, HEIGTH, "window");
+    sfRenderWindow *window = create_window(WIDTH, HEIGTH, "KFC HUNTER");
     sfSprite *sprite = sfSprite_create();
     sfEvent event;
     sfIntRect rect;
+    sfImage *test = sfImage_createFromFile("src/images/icon.png");
     sfTexture *texture = sfTexture_createFromFile("src/images/chicken_sprite.png", NULL);
     sfClock *clock = sfClock_create();
     sfTime time;
@@ -57,6 +35,8 @@ int main(void)
     rect.width = 200;
     rect.height = 180;
     sfSprite_setTexture(sprite, texture, sfTrue);
+
+    sfRenderWindow_setIcon(window, sfImage_getSize(test).x, sfImage_getSize(test).y, sfImage_getPixelsPtr(test));
 
     while (sfRenderWindow_isOpen(window)) {
         sfRenderWindow_clear(window, sfBlack);
