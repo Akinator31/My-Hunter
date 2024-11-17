@@ -6,7 +6,7 @@
 */
 
 #include <SFML/Graphics.h>
-#include "include/my_hunter.h"
+#include "../../include/my_hunter.h"
 
 int load_main_page(sfRenderWindow *window)
 {

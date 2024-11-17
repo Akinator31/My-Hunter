@@ -8,5 +8,6 @@ typedef struct framebuffer_s {
 
 struct main_window {
     sfRenderWindow *window;
-    
 };
+
+sfRenderWindow *create_window(unsigned int width, unsigned int heigth, char *window_title);
