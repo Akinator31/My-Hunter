@@ -14,11 +14,12 @@ int main(void)
 
     sfRenderWindow_setIcon(window, sfImage_getSize(icon).x, sfImage_getSize(icon).y, sfImage_getPixelsPtr(icon));
     while (sfRenderWindow_isOpen(window)) {
+        sfRenderWindow_clear(window, sfBlack);
         while (sfRenderWindow_pollEvent(window, &event)) {
             if (event.type == sfEvtClosed)
                 sfRenderWindow_close(window);
         }
-        sfRenderWindow_clear(window, sfBlack);
+        load_main_page(window);
         sfRenderWindow_display(window);
     }
     sfRenderWindow_destroy(window);

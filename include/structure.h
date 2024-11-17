@@ -7,5 +7,11 @@
 
 #ifndef INCLUDED_STRUCTURE_H
     #define INCLUDED_STRUCTURE_H
+    #include <SFML/Graphics.h>
+
+typedef struct scene_s {
+    sfTexture *texture;
+    sfSprite *sprite;
+} scene_t;
 
 #endif
