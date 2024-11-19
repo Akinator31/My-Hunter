@@ -7,16 +7,8 @@
 
 #include <SFML/Graphics.h>
 #include "structure.h"
-
-typedef struct framebuffer_s {
-    sfUint8 *pixels;
-    unsigned int width;
-    unsigned int height;
-} framebuffer_t;
-
-struct main_window {
-    sfRenderWindow *window;
-};
+#include "my_list.h"
 
 sfRenderWindow *create_window(unsigned int width, unsigned int heigth, char *window_title);
 void load_main_page(sfRenderWindow *window);
+void analyse_event(sfRenderWindow *window, sfEvent *event);

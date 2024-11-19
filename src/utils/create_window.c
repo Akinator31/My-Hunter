@@ -9,12 +9,8 @@
 
 sfRenderWindow *create_window(unsigned int width, unsigned int heigth, char *window_title)
 {
-    sfRenderWindow *window;
-    sfVideoMode video_mode;
+    sfVideoMode video_mode = {width, heigth, 32};
+    sfRenderWindow *window = sfRenderWindow_create(video_mode, window_title, sfResize | sfClose, NULL);
 
-    video_mode.width = width;
-    video_mode.height = heigth;
-    video_mode.bitsPerPixel = 32;
-    window = sfRenderWindow_create(video_mode, window_title, sfResize | sfClose, NULL);
     return window;
 }
