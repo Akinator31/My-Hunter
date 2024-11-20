@@ -13,27 +13,15 @@
     #include "my_list.h"
 
 typedef struct linked_list_s linked_list_t;
-typedef struct node_s node_t;
-
-struct node_s {
-    void *data;
-    node_t *next;
-};
 
 struct linked_list_s {
-    node_t *head;
-    node_t *tail;
-    int size;
-    int data_size;
+    linked_list_t *next;
+    void *data;
 };
 
-linked_list_t *new_list(int data_size);
-int is_empty_list(linked_list_t *list);
-linked_list_t *push_back_list(linked_list_t *list, void *data);
+linked_list_t *new_list();
 linked_list_t *push_front_list(linked_list_t *list, void *data);
-linked_list_t *pop_back_list(linked_list_t *list);
-linked_list_t *pop_front_list(linked_list_t *list);
-linked_list_t *clear_list(linked_list_t *list);
-node_t *get_node(linked_list_t *list, int index);
+linked_list_t *pop_front_list(linked_list_t *list, void (*clean_func)(void *data));
+void clear_list(linked_list_t *list);
 
 #endif

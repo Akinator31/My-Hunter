@@ -7,7 +7,7 @@
 
 #include <stdlib.h>
 #include <SFML/Graphics.h>
-#include "../../include/my_list.h"
+#include "../../lib/my_lib/my.h"
 #include "../../include/my_hunter.h"
 #include "../../include/structure.h"
 #include "../../include/ressources.h"
@@ -34,4 +34,14 @@ engine_t *load_game(char *title, int width, unsigned int height, unsigned int de
     engine->delta_time = delta_time;
     engine->default_fps_framerate = default_framerate;
     return engine;
+}
+
+void engine_destroy(engine_t *engine)
+{
+    free(engine->window);
+    free(engine->clock);
+    free(engine->current_scene);
+    free(engine->scenes_list);
+    free(engine->ressources);
+    free(engine);
 }

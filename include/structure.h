@@ -10,6 +10,7 @@
     #include <SFML/Graphics.h>
     #include <stdbool.h>
     #include "my_list.h"
+    #include "../lib/my_lib/my.h"
 
 typedef struct engine_s engine_t;
 typedef struct scene_s scene_t;

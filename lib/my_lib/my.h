@@ -8,6 +8,7 @@
 #ifndef MY_H
     #define MY_H
     #include <stdlib.h>
+    #include "../../include/my_list.h"
 
 void my_putchar(char c);
 int my_isneg(int nb);

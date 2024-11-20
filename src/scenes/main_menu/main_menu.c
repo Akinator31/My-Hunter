@@ -6,36 +6,65 @@
 */
 
 #include <SFML/Graphics.h>
-#include "../../include/my_hunter.h"
-#include "../../include/structure.h"
+#include <stdlib.h>
+#include "../../../include/my_hunter.h"
+#include "../../../include/structure.h"
+#include "../../../include/my_list.h"
 
-void load_button_main_page(sfRenderWindow *window)
+void init_main_page(scene_t *scene, engine_t *engine)
 {
-    sfImage *start_button = sfImage_createFromFile("src/images/main_menu/buttons/start_button.png");
-    sfIntRect start_button_area = {700, 352};
-    sfTexture *texture = sfTexture_createFromImage(start_button, &start_button_area);
-    sfSprite *button_sprite = sfSprite_create();
-    sfVector2f start_button_pos = {800, 800};
+    linked_list_t *temp = scene->entity_list;
 
-    sfSprite_setTexture(button_sprite, texture, sfFalse);
-    sfSprite_setPosition(button_sprite, start_button_pos);
-    sfRenderWindow_drawSprite(window, button_sprite, NULL);
-    sfTexture_destroy(texture);
-    sfImage_destroy(start_button);
-    sfSprite_destroy(button_sprite);
+    while (temp != NULL) {
+        sfRenderWindow_drawSprite(engine->window, ((entity_t *)temp->data)->sprite, NULL);
+        temp = temp->next;
+    }
 }
 
-void load_main_page(sfRenderWindow *window)
+void render_main_page(scene_t *scene, engine_t *engine)
 {
-    sfImage *background = sfImage_createFromFile("src/images/main_menu/bg.png");
+    sfRenderWindow_clear(engine->window, sfBlack);
+    sfRenderWindow_display(engine->window);
+}
+
+void destroy_main_page(scene_t *scene)
+{
+    linked_list_t *temp = scene->entity_list;
+
+    for (int i = 0; temp->next != NULL; i++) {
+        ((entity_t *)temp->data)->entity_destroy(temp->data);
+    }
+}
+
+scene_t *load_main_page(engine_t *engine)
+{
+    scene_t *main_scene = malloc(sizeof(scene_t));
+    linked_list_t *entity_list = new_list();
+    entity_t *background = malloc(sizeof(entity_t));
+    entity_t *button = malloc(sizeof(entity_t));
+    sfVector2f start_button_pos = {800, 800};
+    sfVector2f background_pos = {0, 0};
     sfIntRect background_area = {1920, 1080};
-    sfTexture *texture = sfTexture_createFromImage(background, &background_area);
+    sfIntRect start_button_area = {700, 352};
     sfSprite *background_sprite = sfSprite_create();
-    
-    sfSprite_setTexture(background_sprite, texture, sfFalse);
-    sfRenderWindow_drawSprite(window, background_sprite, NULL);
-    load_button_main_page(window);
-    sfTexture_destroy(texture);
-    sfImage_destroy(background);
-    sfSprite_destroy(background_sprite);
+    sfSprite *button_sprite = sfSprite_create();
+    sfTexture *background_texture = sfTexture_createFromImage(engine->ressources->background, &background_area);
+    sfTexture *button_texture = sfTexture_createFromImage(engine->ressources->background, &background_area);
+
+    background->sprite = background_sprite;
+    background->texture = background_texture;
+    background->pos = NULL;
+    button->sprite = button_sprite;
+    button->texture = button_texture;
+    button->pos = NULL;
+
+    sfSprite_setTexture(background->sprite, background->texture, sfFalse);
+    entity_list = push_front_list(entity_list, background);
+    entity_list = push_front_list(entity_list, button);
+    main_scene->id = 1;
+    main_scene->entity_list = entity_list;
+    main_scene->scene_init = &init_main_page;
+    main_scene->scene_render = &render_main_page;
+    main_scene->scene_destroy = &destroy_main_page;
+    return main_scene;
 }

@@ -5,10 +5,10 @@
 ** my_hunter
 */
 
-#include <SFML/Graphics.h>
-#include "structure.h"
-#include "my_list.h"
+#ifndef INCLUDED_MY_HUNTER_H
+    #define INCLUDED_MY_HUNTER_H
+    #include <SFML/Graphics.h>
 
 sfRenderWindow *create_window(unsigned int width, unsigned int heigth, char *window_title);
-void load_main_page(sfRenderWindow *window);
-void analyse_event(sfRenderWindow *window, sfEvent *event);
+
+#endif

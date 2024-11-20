@@ -8,6 +8,7 @@
 #include <SFML/Graphics.h>
 #include "../../include/my_hunter.h"
 #include "../../include/structure.h"
+#include "../../include/event.h"
 
 void analyse_event(sfRenderWindow *window, sfEvent *event)
 {

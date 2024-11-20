@@ -7,10 +7,12 @@
 
 #ifndef INCLUDED_ENGINE_H
     #define INCLUDED_ENGINE_H
+    #include "../lib/my_lib/my.h"
     #include "my_hunter.h"
     #include "structure.h"
     #include "ressources.h"
 
 engine_t *load_game(char *title, int width, unsigned int height, unsigned int default_framerate);
+void engine_destroy(engine_t *engine);
 
 #endif

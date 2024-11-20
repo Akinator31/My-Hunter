@@ -15,10 +15,11 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	gcc -c $(SRC)
-	ar rc $(NAME) *.o
+	ar rc libmy.a *.o
 
 clean:
 	rm -f *.o
+	rm -f my_list/*.o
 
 fclean: clean
 

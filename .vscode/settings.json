@@ -2,6 +2,13 @@
     "files.associations": {
         "stdlib.h": "c",
         "stdbool.h": "c",
-        "graphics.h": "c"
+        "graphics.h": "c",
+        "my_list.h": "c",
+        "my.h": "c",
+        "string.h": "c",
+        "scenes_manager.C": "cpp",
+        "my_hunter.h": "c",
+        "structure.h": "c",
+        "cstdlib": "c"
     }
 }
