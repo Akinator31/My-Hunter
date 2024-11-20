@@ -11,6 +11,8 @@
     #include <stdbool.h>
     #include "my_list.h"
     #include "../lib/my_lib/my.h"
+    #define POS(x, y) ((sfVector2f){(x), (y)})
+    #define AREA(x, y) ((sfIntRect){(x), (y)})
 
 typedef struct engine_s engine_t;
 typedef struct scene_s scene_t;
@@ -44,7 +46,6 @@ struct engine_s {
 struct scene_s {
     int id;
     linked_list_t *entity_list;
-    void (*scene_init)(scene_t *scene, engine_t *engine);
     void (*scene_update)(scene_t *scene, engine_t *engine, float delta_time);
     void (*scene_render)(scene_t *scene, engine_t *engine);
     scene_t *(*scene_transition)(scene_t *current_scene, engine_t engine);
@@ -54,7 +55,7 @@ struct scene_s {
 struct entity_s {
     sfSprite *sprite;
     sfTexture *texture;
-    sfVector2f *pos;
+    sfVector2f pos;
     int velocity;
     int state;
     void (*entity_init)(entity_t *entity, scene_t *scene, engine_t *engine);

@@ -14,5 +14,6 @@
 
 engine_t *load_game(char *title, int width, unsigned int height, unsigned int default_framerate);
 void engine_destroy(engine_t *engine);
+void load_current_scene(engine_t *engine);
 
 #endif

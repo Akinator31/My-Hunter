@@ -7,6 +7,7 @@
 
 SRC =	main_loop.c \
 		src/engine/engine.c \
+		src/engine/load_current_scene.c \
 		lib/my_lib/my_list/add_data.c \
 		lib/my_lib/my_list/info_list.c \
 		lib/my_lib/my_list/remove_data.c \
@@ -14,13 +15,15 @@ SRC =	main_loop.c \
 SCENES =	src/scenes/scenes_manager.c \
 			src/scenes/main_menu/main_menu.c \
 
+ENTITY = 	src/entity/entity.c \
+
 RESSOURCES = 	src/ressources/ressources_manager.c \
 
 EVENT = 	src/event/event_manager.c \
 
 UTILS =	src/utils/create_window.c
 
-OBJ = $(SRC:.c=.o) $(SCENES:.c=.o) $(RESSOURCES:.c=.o) $(EVENT:.c=.o) $(UTILS:.c=.o)
+OBJ = $(SRC:.c=.o) $(SCENES:.c=.o) $(RESSOURCES:.c=.o) $(EVENT:.c=.o) $(ENTITY:.c=.o) $(UTILS:.c=.o)
 
 LIB = lib/my_lib/libmy.a
 

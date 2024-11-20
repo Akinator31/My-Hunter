@@ -20,13 +20,15 @@
 int main(void)
 {
     engine_t *engine = load_game(NAME, WIDTH, HEIGTH, 60);
-    scene_t *test = load_main_page(engine);
+    linked_list_t *scenes = load_scenes(engine);
+    sfClock *clock = sfClock_create();
 
+    engine->scenes_list = scenes;
     sfRenderWindow_setFramerateLimit(engine->window, engine->default_fps_framerate);
     while (sfRenderWindow_isOpen(engine->window)) {
         sfRenderWindow_clear(engine->window, sfBlack);
-        printf("id : %d\n", test->id);
-        test->scene_init(test, engine);
+        printf("FPS : %f\n", 1 / sfTime_asSeconds(sfClock_restart(clock)));
+        load_current_scene(engine);
         while (sfRenderWindow_pollEvent(engine->window, &engine->event)) {
             analyse_event(engine->window, &engine->event);
         }
