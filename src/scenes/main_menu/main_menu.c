@@ -37,6 +37,9 @@ void update_main_page(scene_t *scene, engine_t *engine, float delta_time)
         if (((entity_t *)(temp->data))->id == 3) {
             set_sprite_hover(((entity_t *)(temp->data))->sprite, mouse_pos, engine->ressources->quit_button_hover, engine->ressources->quit_button);
         }
+        if (((entity_t *)(temp->data))->id == 4) {
+            set_sprite_hover(((entity_t *)(temp->data))->sprite, mouse_pos, engine->ressources->settings_button_hover, engine->ressources->settings_button);
+        }
         temp = temp->next;
     }
 }
@@ -60,9 +63,11 @@ scene_t *init_main_page(engine_t *engine)
     entity_t *background = create_entity(engine->ressources->background, POS(0, 0), AREA(1920, 1080), 1);
     entity_t *play_button = create_entity(engine->ressources->play_button, POS(150, 800), AREA(300, 151), 2);
     entity_t *quit_button = create_entity(engine->ressources->quit_button, POS(500, 800), AREA(154, 151), 3);
+    entity_t *settings_button = create_entity(engine->ressources->settings_button, POS(1736, 30), AREA(154, 151), 4);
 
     entity_list = push_front_list(entity_list, play_button);
     entity_list = push_front_list(entity_list, quit_button);
+    entity_list = push_front_list(entity_list, settings_button);
     entity_list = push_front_list(entity_list, background);
     main_scene->id = 1;
     main_scene->entity_list = entity_list;

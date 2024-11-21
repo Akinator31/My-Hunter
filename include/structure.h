@@ -70,6 +70,8 @@ struct ressource_manager_s {
     sfTexture *play_button_hover;
     sfTexture *quit_button;
     sfTexture *quit_button_hover;
+    sfTexture *settings_button;
+    sfTexture *settings_button_hover;
     void (*destroy_ressources)(ressource_manager_t *ressources);
 };
 

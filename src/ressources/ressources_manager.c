@@ -17,6 +17,8 @@ void destroy_ressources(ressource_manager_t *ressources)
     sfTexture_destroy(ressources->play_button_hover);
     sfTexture_destroy(ressources->quit_button);
     sfTexture_destroy(ressources->quit_button_hover);
+    sfTexture_destroy(ressources->settings_button);
+    sfTexture_destroy(ressources->settings_button_hover);
 }
 
 ressource_manager_t *create_ressources(void)
@@ -27,7 +29,9 @@ ressource_manager_t *create_ressources(void)
     ressources->play_button = sfTexture_createFromFile("assets/images/main_menu/buttons/start_button.png", &AREA(300, 151));
     ressources->play_button_hover = sfTexture_createFromFile("assets/images/main_menu/buttons/hover/start_button_hover.png", &AREA(300, 151));
     ressources->quit_button = sfTexture_createFromFile("assets/images/main_menu/buttons/quit_button.png", &AREA(154, 151));
-    ressources->quit_button_hover = sfTexture_createFromFile("assets/images/main_menu/buttons/hover/quit_button_hover_1.png", &AREA(161, 151));
+    ressources->quit_button_hover = sfTexture_createFromFile("assets/images/main_menu/buttons/hover/quit_button_hover.png", &AREA(161, 151));
+    ressources->settings_button = sfTexture_createFromFile("assets/images/main_menu/buttons/settings_button.png", &AREA(154, 151));
+    ressources->settings_button_hover = sfTexture_createFromFile("assets/images/main_menu/buttons/hover/settings_button_hover.png", &AREA(154, 151));
     ressources->destroy_ressources = &destroy_ressources;
     return ressources;
 }
