@@ -9,6 +9,7 @@
         "scenes_manager.C": "cpp",
         "my_hunter.h": "c",
         "structure.h": "c",
-        "cstdlib": "c"
+        "cstdlib": "c",
+        "entity.h": "c"
     }
 }

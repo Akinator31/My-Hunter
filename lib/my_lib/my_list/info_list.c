@@ -19,8 +19,8 @@ void clear_list(linked_list_t *list)
     linked_list_t *temp = list;
 
     while (list != NULL) {
-        free(temp);
-        temp = list->next;
+        temp = list;
         list = list->next;
+        free(temp);
     }
 }

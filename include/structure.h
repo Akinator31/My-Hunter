@@ -54,21 +54,23 @@ struct scene_s {
 
 struct entity_s {
     sfSprite *sprite;
-    sfTexture *texture;
     sfVector2f pos;
     int velocity;
-    int state;
+    int id;
     void (*entity_init)(entity_t *entity, scene_t *scene, engine_t *engine);
-    void (*entity_update)(entity_t *entity, scene_t *scene, engine_t *engine, float delta_time);
+    void (*entity_update)(entity_t *entity, scene_t *scene, engine_t *engine);
     void (*entity_render)(entity_t *entity, engine_t *engine);
     sfBool (*entity_check_collision)(entity_t *entity, entity_t *other);
     void (*entity_destroy)(entity_t *entity);
 };
 
 struct ressource_manager_s {
-    sfImage *background;
-    sfImage *play_button;
-    sfImage *quit_button;
+    sfTexture *background;
+    sfTexture *play_button;
+    sfTexture *play_button_hover;
+    sfTexture *quit_button;
+    sfTexture *quit_button_hover;
+    void (*destroy_ressources)(ressource_manager_t *ressources);
 };
 
 #endif

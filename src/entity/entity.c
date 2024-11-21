@@ -7,14 +7,28 @@
 
 #include <stdlib.h>
 #include "../../include/structure.h"
+#include "../../include/entity.h"
 
-entity_t *create_entity(sfImage *image, sfVector2f pos, sfIntRect area)
+void destroy_entity(entity_t *entity)
+{
+    sfSprite_destroy(entity->sprite);
+    free(entity);
+}
+
+// entity_t *change_entity_image(entity_t *entity, sfImage *image, sfIntRect area, engine_t *engine)
+// {
+//     sfTexture_destroy(entity->texture);
+//     entity->sprite = 
+// }
+
+entity_t *create_entity(sfTexture *texture, sfVector2f pos, sfIntRect area, int id)
 {
     entity_t *entity = malloc(sizeof(entity_t));
     entity->sprite = sfSprite_create();
-    entity->texture = sfTexture_createFromImage(image, &area);
     entity->pos = pos;
-    sfSprite_setTexture(entity->sprite, entity->texture, sfFalse);
+    entity->id = id;
+    entity->entity_destroy = &destroy_entity;
+    sfSprite_setTexture(entity->sprite, texture, sfFalse);
     sfSprite_setPosition(entity->sprite, pos);
     return entity;
 }

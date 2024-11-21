@@ -21,7 +21,8 @@ RESSOURCES = 	src/ressources/ressources_manager.c \
 
 EVENT = 	src/event/event_manager.c \
 
-UTILS =	src/utils/create_window.c
+UTILS =	src/utils/create_window.c \
+		src/utils/set_sprite_hover.c \
 
 OBJ = $(SRC:.c=.o) $(SCENES:.c=.o) $(RESSOURCES:.c=.o) $(EVENT:.c=.o) $(ENTITY:.c=.o) $(UTILS:.c=.o)
 

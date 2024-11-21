@@ -11,6 +11,7 @@
 #include "../../include/my_hunter.h"
 #include "../../include/structure.h"
 #include "../../include/ressources.h"
+#include "../../include/scenes.h"
 #include "../../include/utils.h"
 
 engine_t *load_game(char *title, int width, unsigned int height, unsigned int default_framerate)
@@ -18,8 +19,6 @@ engine_t *load_game(char *title, int width, unsigned int height, unsigned int de
     engine_t *engine = malloc(sizeof(*engine));
     sfRenderWindow *window = create_window(width, height, title);
     sfClock *clock = sfClock_create();
-    scene_t *current_scene = NULL;
-    linked_list_t *scene_list = new_list(sizeof(scene_t));
     ressource_manager_t *ressources = create_ressources();
     sfEvent event;
     bool is_running = false;
@@ -27,8 +26,9 @@ engine_t *load_game(char *title, int width, unsigned int height, unsigned int de
     engine->window = window;
     engine->clock = clock;
     engine->current_scene = NULL;
-    engine->scenes_list = new_list(sizeof(scene_t));
+    engine->scenes_list = NULL;
     engine->ressources = ressources;
+    engine->scenes_list = load_scenes(engine);
     engine->event = event;
     engine->is_running = false;
     engine->delta_time = delta_time;
@@ -36,12 +36,23 @@ engine_t *load_game(char *title, int width, unsigned int height, unsigned int de
     return engine;
 }
 
+void clean_scene(linked_list_t *list)
+{
+    linked_list_t *temp = list;
+
+    while (list != NULL) {
+        ((scene_t *)list->data)->scene_destroy(list->data);
+        list = list->next;
+    }
+    clear_list(temp);
+}
+
 void engine_destroy(engine_t *engine)
 {
-    free(engine->window);
-    free(engine->clock);
-    free(engine->current_scene);
-    free(engine->scenes_list);
+    clean_scene(engine->scenes_list);
+    sfRenderWindow_destroy(engine->window);
+    sfClock_destroy(engine->clock);
+    ((ressource_manager_t *)(engine->ressources))->destroy_ressources(engine->ressources);
     free(engine->ressources);
     free(engine);
 }

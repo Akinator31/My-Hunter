@@ -10,5 +10,6 @@
     #include <SFML/Graphics.h>
 
 sfRenderWindow *create_window(unsigned int width, unsigned int heigth, char *window_title);
+void set_sprite_hover(sfSprite *sprite, sfVector2i mouse_pos, sfTexture *new_texture, sfTexture *original_texture);
 
 #endif
