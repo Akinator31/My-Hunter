@@ -8,15 +8,19 @@
 #ifndef INCLUDED_STRUCTURE_H
     #define INCLUDED_STRUCTURE_H
     #include <SFML/Graphics.h>
+    #include <SFML/Audio.h>
     #include <stdbool.h>
     #include "my_list.h"
     #include "../lib/my_lib/my.h"
     #define POS(x, y) ((sfVector2f){(x), (y)})
     #define AREA(x, y) ((sfIntRect){(x), (y)})
+    #define SFTX(filename, index) ressources->filename = sfTexture_createFromFile(assets[index], NULL)
+    #define SFMS(filename, index) ressources->filename = sfMusic_createFromFile(assets[index])
 
 typedef struct engine_s engine_t;
 typedef struct scene_s scene_t;
 typedef struct entity_s entity_t;
+typedef struct scene_parameters_s scene_parameters_t;
 typedef struct ressource_manager_s ressource_manager_t;
 
 enum entity_state {
@@ -46,9 +50,17 @@ struct engine_s {
 struct scene_s {
     int id;
     linked_list_t *entity_list;
-    void (*scene_update)(scene_t *scene, engine_t *engine, float delta_time);
+    int (*scene_update)(scene_t *scene, engine_t *engine, float delta_time);
     void (*scene_render)(scene_t *scene, engine_t *engine);
     scene_t *(*scene_transition)(scene_t *current_scene, engine_t engine);
+    void (*scene_destroy)(scene_t *scene);
+};
+
+struct scene_parameters_s {
+    int id;
+    linked_list_t *entity_list;
+    void (*scene_render)(scene_t *scene, engine_t *engine);
+    void (*scene_update)(scene_t *scene, engine_t *engine, float delta_time);
     void (*scene_destroy)(scene_t *scene);
 };
 
@@ -72,6 +84,12 @@ struct ressource_manager_s {
     sfTexture *quit_button_hover;
     sfTexture *settings_button;
     sfTexture *settings_button_hover;
+    sfTexture *sound_on_button;
+    sfTexture *sound_on_button_hover;
+    sfTexture *sound_off_button;
+    sfTexture *sound_off_button_hover;
+    sfMusic *menu_music;
+    sfMusic *game_music;
     void (*destroy_ressources)(ressource_manager_t *ressources);
 };
 

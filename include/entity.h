@@ -9,7 +9,7 @@
     #define INCLUDED_ENTITY_H
     #include "structure.h"
 
-entity_t *create_entity(sfTexture *texture, sfVector2f pos, sfIntRect area, int id);
+entity_t *create_entity(sfTexture *texture, sfVector2f pos, int id);
 void destroy_entity(entity_t *entity);
 
 #endif

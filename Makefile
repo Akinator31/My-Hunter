@@ -14,6 +14,7 @@ SRC =	main_loop.c \
 
 SCENES =	src/scenes/scenes_manager.c \
 			src/scenes/main_menu/main_menu.c \
+			src/scenes/settings_menu/settings_menu.c \
 
 ENTITY = 	src/entity/entity.c \
 
@@ -23,8 +24,11 @@ EVENT = 	src/event/event_manager.c \
 
 UTILS =	src/utils/create_window.c \
 		src/utils/set_sprite_hover.c \
+		src/utils/is_mouse_on_sprite.c \
+		src/utils/get_scene_by_id.c \
 
-OBJ = $(SRC:.c=.o) $(SCENES:.c=.o) $(RESSOURCES:.c=.o) $(EVENT:.c=.o) $(ENTITY:.c=.o) $(UTILS:.c=.o)
+OBJ = 	$(SRC:.c=.o) $(SCENES:.c=.o) $(RESSOURCES:.c=.o) \
+		$(EVENT:.c=.o) $(ENTITY:.c=.o) $(UTILS:.c=.o)
 
 LIB = lib/my_lib/libmy.a
 
@@ -32,8 +36,8 @@ NAME = my_hunter
 
 all: $(NAME)
 
-CFLAGS += -lcsfml-audio -lcsfml-graphics -lcsfml-system -lcsfml-window -lcsfml-network -fsanitize=address -g3
-
+CFLAGS += -lcsfml-audio -lcsfml-graphics -lcsfml-system
+CFLAGS += -lcsfml-window -lcsfml-network -fsanitize=address -g3
 $(NAME): $(OBJ)
 		make -C lib/my_lib
 		gcc -o $(NAME) $(OBJ) $(LIB) $(CFLAGS)

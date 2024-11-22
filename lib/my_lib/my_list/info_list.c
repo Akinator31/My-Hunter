@@ -9,7 +9,7 @@
 #include "../../../include/my_list.h"
 #include "../my.h"
 
-linked_list_t *new_list()
+linked_list_t *new_list(void)
 {
     return NULL;
 }

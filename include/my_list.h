@@ -19,9 +19,10 @@ struct linked_list_s {
     void *data;
 };
 
-linked_list_t *new_list();
+linked_list_t *new_list(void);
 linked_list_t *push_front_list(linked_list_t *list, void *data);
-linked_list_t *pop_front_list(linked_list_t *list, void (*clean_func)(void *data));
+linked_list_t *pop_front_list(linked_list_t *list,
+    void (*clean_func)(void *data));
 void clear_list(linked_list_t *list);
 
 #endif

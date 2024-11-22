@@ -9,9 +9,11 @@
 #include "../../../include/my_list.h"
 #include "../my.h"
 
-linked_list_t *pop_front_list(linked_list_t *list, void (*clean_func)(void *data))
+linked_list_t *pop_front_list(linked_list_t *list,
+    void (*clean_func)(void *data))
 {
     linked_list_t *temp;
+
     if (list == NULL) {
         return list;
     }

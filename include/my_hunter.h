@@ -8,7 +8,11 @@
 #ifndef INCLUDED_MY_HUNTER_H
     #define INCLUDED_MY_HUNTER_H
     #include <SFML/Graphics.h>
+    #define WIDTH 1920
+    #define HEIGTH 1080
+    #define NAME "KFC HUNTER"
 
-sfRenderWindow *create_window(unsigned int width, unsigned int heigth, char *window_title);
+sfRenderWindow *create_window(unsigned int width,
+    unsigned int heigth, char *window_title);
 
 #endif

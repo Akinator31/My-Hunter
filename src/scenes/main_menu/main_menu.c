@@ -13,18 +13,20 @@
 #include "../../../include/my_list.h"
 #include "../../../include/event.h"
 #include "../../../include/utils.h"
+#include "../../../include/engine.h"
 
 void render_main_page(scene_t *scene, engine_t *engine)
 {
     linked_list_t *temp = scene->entity_list;
 
     while (temp != NULL) {
-        sfRenderWindow_drawSprite(engine->window, ((entity_t *)temp->data)->sprite, NULL);
+        sfRenderWindow_drawSprite(engine->window,
+            ((entity_t *)temp->data)->sprite, NULL);
         temp = temp->next;
     }
 }
 
-void update_main_page(scene_t *scene, engine_t *engine, float delta_time)
+int update_main_page(scene_t *scene, engine_t *engine, float delta_time)
 {
     linked_list_t *temp = scene->entity_list;
     sfFloatRect texture_rect;
@@ -32,13 +34,20 @@ void update_main_page(scene_t *scene, engine_t *engine, float delta_time)
 
     while (temp != NULL) {
         if (((entity_t *)(temp->data))->id == 2) {
-            set_sprite_hover(((entity_t *)(temp->data))->sprite, mouse_pos, engine->ressources->play_button_hover, engine->ressources->play_button);
+            set_sprite_hover(((entity_t *)(temp->data))->sprite, engine, engine->ressources->play_button_hover, engine->ressources->play_button);
         }
         if (((entity_t *)(temp->data))->id == 3) {
-            set_sprite_hover(((entity_t *)(temp->data))->sprite, mouse_pos, engine->ressources->quit_button_hover, engine->ressources->quit_button);
+            set_sprite_hover(((entity_t *)(temp->data))->sprite, engine, engine->ressources->quit_button_hover, engine->ressources->quit_button);
         }
         if (((entity_t *)(temp->data))->id == 4) {
-            set_sprite_hover(((entity_t *)(temp->data))->sprite, mouse_pos, engine->ressources->settings_button_hover, engine->ressources->settings_button);
+            set_sprite_hover(((entity_t *)(temp->data))->sprite, engine, engine->ressources->settings_button_hover, engine->ressources->settings_button);
+        }
+        if ((engine->event.type == sfEvtMouseButtonPressed) && (((entity_t *)(temp->data))->id == 4) && is_mouse_on_sprite(engine, ((entity_t *)(temp->data))->sprite, mouse_pos)) {
+            engine->current_scene = get_scene_by_id(engine, 2);
+        }
+        if ((engine->event.type == sfEvtMouseButtonPressed) && (((entity_t *)(temp->data))->id == 3) && is_mouse_on_sprite(engine, ((entity_t *)(temp->data))->sprite, mouse_pos)) {
+            sfRenderWindow_close(engine->window);
+            return 84;
         }
         temp = temp->next;
     }
@@ -60,11 +69,13 @@ scene_t *init_main_page(engine_t *engine)
 {
     linked_list_t *entity_list = new_list();
     scene_t *main_scene = malloc(sizeof(scene_t));
-    entity_t *background = create_entity(engine->ressources->background, POS(0, 0), AREA(1920, 1080), 1);
-    entity_t *play_button = create_entity(engine->ressources->play_button, POS(150, 800), AREA(300, 151), 2);
-    entity_t *quit_button = create_entity(engine->ressources->quit_button, POS(500, 800), AREA(154, 151), 3);
-    entity_t *settings_button = create_entity(engine->ressources->settings_button, POS(1736, 30), AREA(154, 151), 4);
+    entity_t *background = create_entity(engine->ressources->background, POS(0, 0), 1);
+    entity_t *play_button = create_entity(engine->ressources->play_button, POS(150, 800), 2);
+    entity_t *quit_button = create_entity(engine->ressources->quit_button, POS(500, 800), 3);
+    entity_t *settings_button = create_entity(engine->ressources->settings_button, POS(1736, 30), 4);
 
+    sfMusic_setLoop(engine->ressources->menu_music, sfTrue);
+    sfMusic_play(engine->ressources->menu_music);
     entity_list = push_front_list(entity_list, play_button);
     entity_list = push_front_list(entity_list, quit_button);
     entity_list = push_front_list(entity_list, settings_button);

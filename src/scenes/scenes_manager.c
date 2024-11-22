@@ -13,7 +13,9 @@ linked_list_t *load_scenes(engine_t *engine)
 {
     linked_list_t *scenes_list = new_list();
     scene_t *main_page = init_main_page(engine);
+    scene_t *settings_page = init_settings_page(engine);
 
     scenes_list = push_front_list(scenes_list, main_page);
+    scenes_list = push_front_list(scenes_list, settings_page);
     return scenes_list;
 }

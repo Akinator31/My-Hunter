@@ -21,9 +21,10 @@ void destroy_entity(entity_t *entity)
 //     entity->sprite = 
 // }
 
-entity_t *create_entity(sfTexture *texture, sfVector2f pos, sfIntRect area, int id)
+entity_t *create_entity(sfTexture *texture, sfVector2f pos, int id)
 {
     entity_t *entity = malloc(sizeof(entity_t));
+
     entity->sprite = sfSprite_create();
     entity->pos = pos;
     entity->id = id;
