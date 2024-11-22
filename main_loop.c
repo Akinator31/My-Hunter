@@ -22,6 +22,7 @@ int main(void)
         engine->default_fps_framerate);
     while (sfRenderWindow_isOpen(engine->window)) {
         sfRenderWindow_clear(engine->window, sfBlack);
+        printf("FPS : %f\n", 1 / sfTime_asSeconds(sfClock_restart(engine->clock)));
         load_current_scene(engine);
         if (((scene_t *)(engine->current_scene))->scene_update(engine->current_scene, engine, engine->delta_time) == 84) {
             engine_destroy(engine);
