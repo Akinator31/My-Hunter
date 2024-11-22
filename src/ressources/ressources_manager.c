@@ -22,6 +22,8 @@ static const char *assets[] = {
     "assets/images/settings_menu/buttons/hover/sound_on_hover.png",
     "assets/images/settings_menu/buttons/sound_off.png",
     "assets/images/settings_menu/buttons/hover/sound_off_hover.png",
+    "assets/images/settings_menu/buttons/back_button.png",
+    "assets/images/settings_menu/buttons/hover/back_button_hover.png",
     "assets/sounds/menu-music.ogg",
     "assets/sounds/game-music.ogg",
 };
@@ -39,6 +41,8 @@ void destroy_ressources(ressource_manager_t *ressources)
     sfTexture_destroy(ressources->sound_off_button);
     sfTexture_destroy(ressources->sound_on_button_hover);
     sfTexture_destroy(ressources->sound_off_button_hover);
+    sfTexture_destroy(ressources->back_button);
+    sfTexture_destroy(ressources->back_button_hover);
     sfMusic_destroy(ressources->menu_music);
     sfMusic_destroy(ressources->game_music);
 }
@@ -58,8 +62,10 @@ ressource_manager_t *create_ressources(void)
     SFTX(sound_off_button, 8);
     SFTX(sound_on_button_hover, 9);
     SFTX(sound_off_button_hover, 10);
-    SFMS(menu_music, 11);
-    SFMS(game_music, 12);
+    SFTX(back_button, 11);
+    SFTX(back_button_hover, 12);
+    SFMS(menu_music, 13);
+    SFMS(game_music, 14);
     ressources->destroy_ressources = &destroy_ressources;
     return ressources;
 }

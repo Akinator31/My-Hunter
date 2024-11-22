@@ -88,6 +88,8 @@ struct ressource_manager_s {
     sfTexture *sound_on_button_hover;
     sfTexture *sound_off_button;
     sfTexture *sound_off_button_hover;
+    sfTexture *back_button;
+    sfTexture *back_button_hover;
     sfMusic *menu_music;
     sfMusic *game_music;
     void (*destroy_ressources)(ressource_manager_t *ressources);

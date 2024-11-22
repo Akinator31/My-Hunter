@@ -13,8 +13,11 @@ scene_t *get_scene_by_id(engine_t *engine, int id)
     linked_list_t *temp = engine->scenes_list;
 
     while (temp != NULL) {
-        if (((scene_t *)(temp->data))->id == id)
+        if (((scene_t *)(temp->data))->id == id) {
+            printf("ID : %d\n", ((scene_t *)(temp->data))->id);
             return ((scene_t *)(temp->data));
+        }
     }
+    printf("NON\n");
     return NULL;
 }
