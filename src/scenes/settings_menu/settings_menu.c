@@ -54,10 +54,12 @@ int update_resolution_game(scene_t *scene, engine_t *engine)
     while (temp != NULL) {
         if (MOUSE_PRESSED() && IS_ENTITY(4) &&
             IS_CLICK(((entity_t *)(temp->data))->sprite)) {
+            sfRenderWindow_setPosition(engine->window, SF_VECTOR_2I(0, 0)),
             sfRenderWindow_setSize(engine->window, SF_VECTOR_2U(900, 600));
         }
         if (MOUSE_PRESSED() && IS_ENTITY(5) &&
             IS_CLICK(((entity_t *)(temp->data))->sprite)) {
+            sfRenderWindow_setPosition(engine->window, SF_VECTOR_2I(0, 0)),
             sfRenderWindow_setSize(engine->window, SF_VECTOR_2U(1920, 1080));
         }
         if (MOUSE_PRESSED() && IS_ENTITY(6) &&
