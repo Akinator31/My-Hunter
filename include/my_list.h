@@ -21,6 +21,7 @@ struct linked_list_s {
 
 linked_list_t *new_list(void);
 linked_list_t *push_front_list(linked_list_t *list, void *data);
+linked_list_t *push_front_list_all(linked_list_t *list, int nb, ...);
 linked_list_t *pop_front_list(linked_list_t *list,
     void (*clean_func)(void *data));
 void clear_list(linked_list_t *list);

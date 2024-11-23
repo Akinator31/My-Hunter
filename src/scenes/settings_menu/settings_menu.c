@@ -25,18 +25,32 @@ void render_settings_page(scene_t *scene, engine_t *engine)
     }
 }
 
-int update_settings_page(scene_t *scene, engine_t *engine, float delta_time)
+int update_button_hover_settings(scene_t *scene, engine_t *engine)
+{
+    linked_list_t *temp = scene->entity_list;
+
+    while (temp != NULL) {
+        if (((entity_t *)(temp->data))->id == 3) {
+            set_sprite_hover(GET_SPRITE(), engine,
+                GET_RES(back_button_hover), GET_RES(back_button));
+        }
+        temp = temp->next;
+    }
+}
+
+int update_settings_page(scene_t *scene, engine_t *engine)
 {
     linked_list_t *temp = scene->entity_list;
     sfVector2i mouse_pos = sfMouse_getPositionRenderWindow(engine->window);
 
-    sfMusic_setVolume(engine->ressources->menu_music, 20);
+    update_button_hover_settings(scene, engine);
     while (temp != NULL) {
-        if (((entity_t *)(temp->data))->id == 3) {
-            set_sprite_hover(((entity_t *)(temp->data))->sprite, engine, engine->ressources->back_button_hover, engine->ressources->back_button);
-        }
-        if ((engine->event.type == sfEvtMouseButtonReleased) && (((entity_t *)(temp->data))->id == 3) && is_mouse_on_sprite(engine, ((entity_t *)(temp->data))->sprite, mouse_pos)) {
+        if (MOUSE_RELEASED() && IS_ENTITY(3) &&
+            IS_CLICK(((entity_t *)(temp->data))->sprite)) {
             engine->current_scene = get_scene_by_id(engine, 1);
+        }
+        if (((entity_t *)(temp->data))->id == 2) {
+            manage_music(engine, temp->data);
         }
         temp = temp->next;
     }
@@ -58,13 +72,11 @@ scene_t *init_settings_page(engine_t *engine)
 {
     linked_list_t *entity_list = new_list();
     scene_t *main_scene = malloc(sizeof(scene_t));
-    entity_t *background = create_entity(engine->ressources->background, POS(0, 0), 1);
-    entity_t *sound_button = create_entity(engine->ressources->sound_on_button, POS(100, 500), 2);
-    entity_t *back_button = create_entity(engine->ressources->back_button, POS(1716, 50), 3);
 
-    entity_list = push_front_list(entity_list, sound_button);
-    entity_list = push_front_list(entity_list, back_button);
-    entity_list = push_front_list(entity_list, background);
+    entity_list = push_front_list_all(entity_list, 3,
+        create_entity(engine->ressources->sound_on_button, POS(100, 500), 2),
+        create_entity(engine->ressources->back_button, POS(1736, 30), 3),
+        create_entity(engine->ressources->settings_background, POS(0, 0), 1));
     main_scene->id = 2;
     main_scene->entity_list = entity_list;
     main_scene->scene_render = &render_settings_page;

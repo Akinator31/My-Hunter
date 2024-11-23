@@ -24,6 +24,7 @@ static const char *assets[] = {
     "assets/images/settings_menu/buttons/hover/sound_off_hover.png",
     "assets/images/settings_menu/buttons/back_button.png",
     "assets/images/settings_menu/buttons/hover/back_button_hover.png",
+    "assets/images/settings_menu/settings_bg.png",
     "assets/sounds/menu-music.ogg",
     "assets/sounds/game-music.ogg",
 };
@@ -43,6 +44,7 @@ void destroy_ressources(ressource_manager_t *ressources)
     sfTexture_destroy(ressources->sound_off_button_hover);
     sfTexture_destroy(ressources->back_button);
     sfTexture_destroy(ressources->back_button_hover);
+    sfTexture_destroy(ressources->settings_background);
     sfMusic_destroy(ressources->menu_music);
     sfMusic_destroy(ressources->game_music);
 }
@@ -51,21 +53,22 @@ ressource_manager_t *create_ressources(void)
 {
     ressource_manager_t *ressources = malloc(sizeof(ressource_manager_t));
 
-    SFTX(background, 0);
-    SFTX(play_button, 1);
-    SFTX(play_button_hover, 2);
-    SFTX(quit_button, 3);
-    SFTX(quit_button_hover, 4);
-    SFTX(settings_button, 5);
-    SFTX(settings_button_hover, 6);
-    SFTX(sound_on_button, 7);
-    SFTX(sound_off_button, 8);
-    SFTX(sound_on_button_hover, 9);
-    SFTX(sound_off_button_hover, 10);
-    SFTX(back_button, 11);
-    SFTX(back_button_hover, 12);
-    SFMS(menu_music, 13);
-    SFMS(game_music, 14);
+    SFTX(ressources->background, 0);
+    SFTX(ressources->play_button, 1);
+    SFTX(ressources->play_button_hover, 2);
+    SFTX(ressources->quit_button, 3);
+    SFTX(ressources->quit_button_hover, 4);
+    SFTX(ressources->settings_button, 5);
+    SFTX(ressources->settings_button_hover, 6);
+    SFTX(ressources->sound_on_button, 7);
+    SFTX(ressources->sound_on_button_hover, 8);
+    SFTX(ressources->sound_off_button, 9);
+    SFTX(ressources->sound_off_button_hover, 10);
+    SFTX(ressources->back_button, 11);
+    SFTX(ressources->back_button_hover, 12);
+    SFTX(ressources->settings_background, 13);
+    SFMS(ressources->menu_music, 14);
+    SFMS(ressources->game_music, 15);
     ressources->destroy_ressources = &destroy_ressources;
     return ressources;
 }

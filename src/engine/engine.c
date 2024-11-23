@@ -30,6 +30,9 @@ engine_t *load_game(char *title, int width,
     engine->is_running = false;
     engine->delta_time = 0.0;
     engine->default_fps_framerate = default_framerate;
+    engine->music_playing = PLAYING;
+    sfRenderWindow_setFramerateLimit(engine->window,
+        default_framerate);
     return engine;
 }
 
@@ -44,7 +47,7 @@ void clean_scene(linked_list_t *list)
     clear_list(temp);
 }
 
-void engine_destroy(engine_t *engine)
+int engine_destroy(engine_t *engine)
 {
     clean_scene(engine->scenes_list);
     sfRenderWindow_destroy(engine->window);
@@ -53,4 +56,5 @@ void engine_destroy(engine_t *engine)
         destroy_ressources(engine->ressources);
     free(engine->ressources);
     free(engine);
+    return 0;
 }

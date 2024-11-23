@@ -7,10 +7,12 @@
 
 #include "../../include/my_hunter.h"
 
-sfRenderWindow *create_window(unsigned int width, unsigned int heigth, char *window_title)
+sfRenderWindow *create_window(unsigned int width,
+    unsigned int heigth, char *window_title)
 {
     sfVideoMode video_mode = {width, heigth, 32};
-    sfRenderWindow *window = sfRenderWindow_create(video_mode, window_title, sfClose | sfResize, NULL);
+    sfRenderWindow *window = sfRenderWindow_create(
+        video_mode, window_title, sfClose | sfResize, NULL);
 
     return window;
 }

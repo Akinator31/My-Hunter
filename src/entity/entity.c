@@ -15,12 +15,6 @@ void destroy_entity(entity_t *entity)
     free(entity);
 }
 
-// entity_t *change_entity_image(entity_t *entity, sfImage *image, sfIntRect area, engine_t *engine)
-// {
-//     sfTexture_destroy(entity->texture);
-//     entity->sprite = 
-// }
-
 entity_t *create_entity(sfTexture *texture, sfVector2f pos, int id)
 {
     entity_t *entity = malloc(sizeof(entity_t));

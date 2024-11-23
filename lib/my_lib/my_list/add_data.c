@@ -9,7 +9,7 @@
 #include <sys/stat.h>
 #include "../../../include/my_list.h"
 #include "../my.h"
-#include <string.h>
+#include <stdarg.h>
 
 linked_list_t *push_front_list(linked_list_t *list, void *data)
 {
@@ -18,4 +18,17 @@ linked_list_t *push_front_list(linked_list_t *list, void *data)
     new_element->data = data;
     new_element->next = list;
     return new_element;
+}
+
+linked_list_t *push_front_list_all(linked_list_t *list, int nb, ...)
+{
+    va_list args;
+    linked_list_t *temp;
+
+    va_start(args, nb);
+    for (int i = 0; i < nb; i++) {
+        list = push_front_list(list, va_arg(args, void *));
+    }
+    va_end(args);
+    return list;
 }

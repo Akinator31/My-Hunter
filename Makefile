@@ -26,6 +26,7 @@ UTILS =	src/utils/create_window.c \
 		src/utils/set_sprite_hover.c \
 		src/utils/is_mouse_on_sprite.c \
 		src/utils/get_scene_by_id.c \
+		src/utils/mute_or_unmute_music.c \
 
 OBJ = 	$(SRC:.c=.o) $(SCENES:.c=.o) $(RESSOURCES:.c=.o) \
 		$(EVENT:.c=.o) $(ENTITY:.c=.o) $(UTILS:.c=.o)

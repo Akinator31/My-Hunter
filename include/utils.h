@@ -13,7 +13,9 @@ sfRenderWindow *create_window(unsigned int width,
     unsigned int heigth, char *window_title);
 void set_sprite_hover(sfSprite *sprite, engine_t *engine,
     sfTexture *new_texture, sfTexture *original_texture);
-sfBool is_mouse_on_sprite(engine_t *engine, sfSprite *sprite, sfVector2i mouse_pos);
+sfBool is_mouse_on_sprite(engine_t *engine,
+    sfSprite *sprite, sfVector2i mouse_pos);
 scene_t *get_scene_by_id(engine_t *engine, int id);
+void mute_or_unmute_music(engine_t *engine, int mute_or_unmute);
 
 #endif

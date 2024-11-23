@@ -10,5 +10,6 @@
     #include <SFML/Graphics.h>
 
 void analyse_event(sfRenderWindow *window, sfEvent *event);
+void manage_music(engine_t *engine, entity_t *entity);
 
 #endif

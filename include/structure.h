@@ -14,13 +14,18 @@
     #include "../lib/my_lib/my.h"
     #define POS(x, y) ((sfVector2f){(x), (y)})
     #define AREA(x, y) ((sfIntRect){(x), (y)})
-    #define SFTX(filename, index) ressources->filename = sfTexture_createFromFile(assets[index], NULL)
-    #define SFMS(filename, index) ressources->filename = sfMusic_createFromFile(assets[index])
+    #define SFTX(res, i) res = sfTexture_createFromFile(assets[i], NULL)
+    #define SFMS(res, i) res = sfMusic_createFromFile(assets[i])
+    #define GET_RES(name) engine->ressources->name
+    #define GET_SPRITE() ((entity_t *)(temp->data))->sprite
+    #define MOUSE_RELEASED() engine->event.type == sfEvtMouseButtonReleased
+    #define MOUSE_PRESSED() engine->event.type == sfEvtMouseButtonPressed
+    #define IS_ENTITY(entity_id) ((entity_t *)(temp->data))->id == entity_id
+    #define IS_CLICK(sprite) is_mouse_on_sprite(engine, sprite, mouse_pos)
 
 typedef struct engine_s engine_t;
 typedef struct scene_s scene_t;
 typedef struct entity_s entity_t;
-typedef struct scene_parameters_s scene_parameters_t;
 typedef struct ressource_manager_s ressource_manager_t;
 
 enum entity_state {
@@ -35,6 +40,11 @@ enum game_state {
     STOPED
 };
 
+enum music_state {
+    PLAYING,
+    STOPPED
+};
+
 struct engine_s {
     sfRenderWindow *window;
     sfClock *clock;
@@ -45,22 +55,15 @@ struct engine_s {
     bool is_running;
     float delta_time;
     int default_fps_framerate;
+    int music_playing;
 };
 
 struct scene_s {
     int id;
     linked_list_t *entity_list;
-    int (*scene_update)(scene_t *scene, engine_t *engine, float delta_time);
+    int (*scene_update)(scene_t *scene, engine_t *engine);
     void (*scene_render)(scene_t *scene, engine_t *engine);
     scene_t *(*scene_transition)(scene_t *current_scene, engine_t engine);
-    void (*scene_destroy)(scene_t *scene);
-};
-
-struct scene_parameters_s {
-    int id;
-    linked_list_t *entity_list;
-    void (*scene_render)(scene_t *scene, engine_t *engine);
-    void (*scene_update)(scene_t *scene, engine_t *engine, float delta_time);
     void (*scene_destroy)(scene_t *scene);
 };
 
@@ -90,6 +93,7 @@ struct ressource_manager_s {
     sfTexture *sound_off_button_hover;
     sfTexture *back_button;
     sfTexture *back_button_hover;
+    sfTexture *settings_background;
     sfMusic *menu_music;
     sfMusic *game_music;
     void (*destroy_ressources)(ressource_manager_t *ressources);
