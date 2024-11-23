@@ -12,7 +12,7 @@ sfRenderWindow *create_window(unsigned int width,
 {
     sfVideoMode video_mode = {width, heigth, 32};
     sfRenderWindow *window = sfRenderWindow_create(
-        video_mode, window_title, sfClose | sfResize, NULL);
+        video_mode, window_title, sfClose, NULL);
 
     return window;
 }

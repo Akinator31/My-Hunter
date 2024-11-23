@@ -30,9 +30,40 @@ int update_button_hover_settings(scene_t *scene, engine_t *engine)
     linked_list_t *temp = scene->entity_list;
 
     while (temp != NULL) {
-        if (((entity_t *)(temp->data))->id == 3) {
+        if (((entity_t *)(temp->data))->id == 3)
             set_sprite_hover(GET_SPRITE(), engine,
                 GET_RES(back_button_hover), GET_RES(back_button));
+        if (((entity_t *)(temp->data))->id == 4)
+            set_sprite_hover(GET_SPRITE(), engine,
+                GET_RES(res_900_hover), GET_RES(res_900));
+        if (((entity_t *)(temp->data))->id == 5)
+            set_sprite_hover(GET_SPRITE(), engine,
+                GET_RES(res_1920_hover), GET_RES(res_1920));
+        if (((entity_t *)(temp->data))->id == 6)
+            set_sprite_hover(GET_SPRITE(), engine,
+                GET_RES(res_4k_hover), GET_RES(res_4k));
+        temp = temp->next;
+    }
+}
+
+int update_resolution_game(scene_t *scene, engine_t *engine)
+{
+    linked_list_t *temp = scene->entity_list;
+    sfVector2i mouse_pos = sfMouse_getPositionRenderWindow(engine->window);
+
+    while (temp != NULL) {
+        if (MOUSE_PRESSED() && IS_ENTITY(4) &&
+            IS_CLICK(((entity_t *)(temp->data))->sprite)) {
+            sfRenderWindow_setSize(engine->window, SF_VECTOR_2U(900, 600));
+        }
+        if (MOUSE_PRESSED() && IS_ENTITY(5) &&
+            IS_CLICK(((entity_t *)(temp->data))->sprite)) {
+            sfRenderWindow_setSize(engine->window, SF_VECTOR_2U(1920, 1080));
+        }
+        if (MOUSE_PRESSED() && IS_ENTITY(6) &&
+            IS_CLICK(((entity_t *)(temp->data))->sprite)) {
+            sfRenderWindow_setPosition(engine->window, SF_VECTOR_2I(0, 0)),
+            sfRenderWindow_setSize(engine->window, SF_VECTOR_2U(3840, 2160));
         }
         temp = temp->next;
     }
@@ -44,6 +75,7 @@ int update_settings_page(scene_t *scene, engine_t *engine)
     sfVector2i mouse_pos = sfMouse_getPositionRenderWindow(engine->window);
 
     update_button_hover_settings(scene, engine);
+    update_resolution_game(scene, engine);
     while (temp != NULL) {
         if (MOUSE_RELEASED() && IS_ENTITY(3) &&
             IS_CLICK(((entity_t *)(temp->data))->sprite)) {
@@ -73,9 +105,12 @@ scene_t *init_settings_page(engine_t *engine)
     linked_list_t *entity_list = new_list();
     scene_t *main_scene = malloc(sizeof(scene_t));
 
-    entity_list = push_front_list_all(entity_list, 3,
-        create_entity(engine->ressources->sound_on_button, POS(100, 500), 2),
+    entity_list = push_front_list_all(entity_list, 6,
+        create_entity(engine->ressources->res_4k, POS(285, 900), 6),
+        create_entity(engine->ressources->res_1920, POS(475, 700), 5),
+        create_entity(engine->ressources->res_900, POS(100, 700), 4),
         create_entity(engine->ressources->back_button, POS(1736, 30), 3),
+        create_entity(engine->ressources->sound_on_button, POS(100, 500), 2),
         create_entity(engine->ressources->settings_background, POS(0, 0), 1));
     main_scene->id = 2;
     main_scene->entity_list = entity_list;

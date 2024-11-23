@@ -25,9 +25,25 @@ static const char *assets[] = {
     "assets/images/settings_menu/buttons/back_button.png",
     "assets/images/settings_menu/buttons/hover/back_button_hover.png",
     "assets/images/settings_menu/settings_bg.png",
+    "assets/images/settings_menu/buttons/900.png",
+    "assets/images/settings_menu/buttons/1920.png",
+    "assets/images/settings_menu/buttons/4k.png",
+    "assets/images/settings_menu/buttons/hover/900_hover.png",
+    "assets/images/settings_menu/buttons/hover/1920_hover.png",
+    "assets/images/settings_menu/buttons/hover/4k_hover.png",
     "assets/sounds/menu-music.ogg",
     "assets/sounds/game-music.ogg",
 };
+
+void destroy_secondary_ressources(ressource_manager_t *ressources)
+{
+    sfTexture_destroy(ressources->res_900);
+    sfTexture_destroy(ressources->res_1920);
+    sfTexture_destroy(ressources->res_4k);
+    sfTexture_destroy(ressources->res_900_hover);
+    sfTexture_destroy(ressources->res_1920_hover);
+    sfTexture_destroy(ressources->res_4k_hover);
+}
 
 void destroy_ressources(ressource_manager_t *ressources)
 {
@@ -47,6 +63,19 @@ void destroy_ressources(ressource_manager_t *ressources)
     sfTexture_destroy(ressources->settings_background);
     sfMusic_destroy(ressources->menu_music);
     sfMusic_destroy(ressources->game_music);
+    destroy_secondary_ressources(ressources);
+}
+
+void create_secondary_ressources(ressource_manager_t *ressources)
+{
+    SFTX(ressources->res_900, 14);
+    SFTX(ressources->res_1920, 15);
+    SFTX(ressources->res_4k, 16);
+    SFTX(ressources->res_900_hover, 17);
+    SFTX(ressources->res_1920_hover, 18);
+    SFTX(ressources->res_4k_hover, 19);
+    SFMS(ressources->menu_music, 20);
+    SFMS(ressources->game_music, 21);
 }
 
 ressource_manager_t *create_ressources(void)
@@ -67,8 +96,7 @@ ressource_manager_t *create_ressources(void)
     SFTX(ressources->back_button, 11);
     SFTX(ressources->back_button_hover, 12);
     SFTX(ressources->settings_background, 13);
-    SFMS(ressources->menu_music, 14);
-    SFMS(ressources->game_music, 15);
+    create_secondary_ressources(ressources);
     ressources->destroy_ressources = &destroy_ressources;
     return ressources;
 }

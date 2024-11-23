@@ -22,6 +22,8 @@
     #define MOUSE_PRESSED() engine->event.type == sfEvtMouseButtonPressed
     #define IS_ENTITY(entity_id) ((entity_t *)(temp->data))->id == entity_id
     #define IS_CLICK(sprite) is_mouse_on_sprite(engine, sprite, mouse_pos)
+    #define SF_VECTOR_2U(x, y) ((sfVector2u){(x), (y)})
+    #define SF_VECTOR_2I(x, y) ((sfVector2i){(x), (y)})
 
 typedef struct engine_s engine_t;
 typedef struct scene_s scene_t;
@@ -94,6 +96,12 @@ struct ressource_manager_s {
     sfTexture *back_button;
     sfTexture *back_button_hover;
     sfTexture *settings_background;
+    sfTexture *res_900;
+    sfTexture *res_1920;
+    sfTexture *res_4k;
+    sfTexture *res_900_hover;
+    sfTexture *res_1920_hover;
+    sfTexture *res_4k_hover;
     sfMusic *menu_music;
     sfMusic *game_music;
     void (*destroy_ressources)(ressource_manager_t *ressources);

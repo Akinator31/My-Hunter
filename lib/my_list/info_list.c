@@ -6,8 +6,8 @@
 */
 
 #include <stdlib.h>
-#include "../../../include/my_list.h"
-#include "../my.h"
+#include "../../include/my_list.h"
+#include "../my_lib/my.h"
 
 linked_list_t *new_list(void)
 {
