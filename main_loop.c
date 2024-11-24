@@ -13,11 +13,15 @@
 #include "include/engine.h"
 #include "include/scenes.h"
 #include "include/event.h"
+#include "include/utils.h"
 
-int main(void)
+int main(int ac, char **av)
 {
-    engine_t *engine = load_game(NAME, WIDTH, HEIGTH, 60);
+    engine_t *engine;
 
+    if (ac > 1)
+        return help(ac, av);
+    engine = load_game(NAME, WIDTH, HEIGTH, 60);
     while (sfRenderWindow_isOpen(engine->window)) {
         sfRenderWindow_clear(engine->window, sfBlack);
         load_current_scene(engine);
