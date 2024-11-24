@@ -14,7 +14,7 @@
 #include "../../../include/event.h"
 #include "../../../include/utils.h"
 
-void render_settings_page(scene_t *scene, engine_t *engine)
+static void render_settings_page(scene_t *scene, engine_t *engine)
 {
     linked_list_t *temp = scene->entity_list;
 
@@ -44,12 +44,12 @@ int update_button_hover_settings(scene_t *scene, engine_t *engine)
                 GET_RES(res_4k_hover), GET_RES(res_4k));
         temp = temp->next;
     }
+    return 1;
 }
 
-int update_resolution_game(scene_t *scene, engine_t *engine)
+void update_resolution_game(scene_t *scene, engine_t *engine)
 {
     linked_list_t *temp = scene->entity_list;
-    sfVector2i mouse_pos = sfMouse_getPositionRenderWindow(engine->window);
 
     while (temp != NULL) {
         if (MOUSE_PRESSED() && IS_ENTITY(4) &&
@@ -74,7 +74,6 @@ int update_resolution_game(scene_t *scene, engine_t *engine)
 int update_settings_page(scene_t *scene, engine_t *engine)
 {
     linked_list_t *temp = scene->entity_list;
-    sfVector2i mouse_pos = sfMouse_getPositionRenderWindow(engine->window);
 
     update_button_hover_settings(scene, engine);
     update_resolution_game(scene, engine);
@@ -88,6 +87,7 @@ int update_settings_page(scene_t *scene, engine_t *engine)
         }
         temp = temp->next;
     }
+    return 1;
 }
 
 void destroy_settings_page(scene_t *scene)

@@ -21,8 +21,11 @@ int main(void)
     while (sfRenderWindow_isOpen(engine->window)) {
         sfRenderWindow_clear(engine->window, sfBlack);
         load_current_scene(engine);
-        if (((scene_t *)(engine->current_scene))->scene_update
-            (engine->current_scene, engine) == 84)
+        if (engine->state == PAUSED)
+            ((scene_t *)(engine->current_scene))
+                ->scene_pause_update(engine->current_scene, engine);
+        if (engine->state == RUNNING && ((scene_t *)(engine->current_scene))
+            ->scene_update(engine->current_scene, engine) == 84)
             return engine_destroy(engine);
         while (sfRenderWindow_pollEvent(engine->window, &engine->event))
             analyse_event(engine->window, &engine->event);

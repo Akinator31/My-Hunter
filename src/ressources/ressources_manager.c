@@ -31,6 +31,11 @@ static const char *assets[] = {
     "assets/images/settings_menu/buttons/hover/900_hover.png",
     "assets/images/settings_menu/buttons/hover/1920_hover.png",
     "assets/images/settings_menu/buttons/hover/4k_hover.png",
+    "assets/images/game_scene/game_bg.png",
+    "assets/images/game_scene/buttons/pause.png",
+    "assets/images/game_scene/buttons/hover/pause_hover.png",
+    "assets/images/game_scene/buttons/play.png",
+    "assets/images/game_scene/buttons/hover/play_hover.png",
     "assets/sounds/menu-music.ogg",
     "assets/sounds/game-music.ogg",
 };
@@ -43,6 +48,11 @@ void destroy_secondary_ressources(ressource_manager_t *ressources)
     sfTexture_destroy(ressources->res_900_hover);
     sfTexture_destroy(ressources->res_1920_hover);
     sfTexture_destroy(ressources->res_4k_hover);
+    sfTexture_destroy(ressources->game_background);
+    sfTexture_destroy(ressources->pause_button);
+    sfTexture_destroy(ressources->pause_button_hover);
+    sfTexture_destroy(ressources->resume_button);
+    sfTexture_destroy(ressources->resume_button_hover);
 }
 
 void destroy_ressources(ressource_manager_t *ressources)
@@ -68,34 +78,39 @@ void destroy_ressources(ressource_manager_t *ressources)
 
 void create_secondary_ressources(ressource_manager_t *ressources)
 {
-    SFTX(ressources->res_900, 14);
-    SFTX(ressources->res_1920, 15);
-    SFTX(ressources->res_4k, 16);
-    SFTX(ressources->res_900_hover, 17);
-    SFTX(ressources->res_1920_hover, 18);
-    SFTX(ressources->res_4k_hover, 19);
-    SFMS(ressources->menu_music, 20);
-    SFMS(ressources->game_music, 21);
+    TX_CREATE(ressources->res_900, 14);
+    TX_CREATE(ressources->res_1920, 15);
+    TX_CREATE(ressources->res_4k, 16);
+    TX_CREATE(ressources->res_900_hover, 17);
+    TX_CREATE(ressources->res_1920_hover, 18);
+    TX_CREATE(ressources->res_4k_hover, 19);
+    TX_CREATE(ressources->game_background, 20);
+    TX_CREATE(ressources->pause_button, 21);
+    TX_CREATE(ressources->pause_button_hover, 22);
+    TX_CREATE(ressources->resume_button, 23);
+    TX_CREATE(ressources->resume_button_hover, 24);
+    MUSIC_CREATE(ressources->menu_music, 25);
+    MUSIC_CREATE(ressources->game_music, 26);
 }
 
 ressource_manager_t *create_ressources(void)
 {
     ressource_manager_t *ressources = malloc(sizeof(ressource_manager_t));
 
-    SFTX(ressources->background, 0);
-    SFTX(ressources->play_button, 1);
-    SFTX(ressources->play_button_hover, 2);
-    SFTX(ressources->quit_button, 3);
-    SFTX(ressources->quit_button_hover, 4);
-    SFTX(ressources->settings_button, 5);
-    SFTX(ressources->settings_button_hover, 6);
-    SFTX(ressources->sound_on_button, 7);
-    SFTX(ressources->sound_on_button_hover, 8);
-    SFTX(ressources->sound_off_button, 9);
-    SFTX(ressources->sound_off_button_hover, 10);
-    SFTX(ressources->back_button, 11);
-    SFTX(ressources->back_button_hover, 12);
-    SFTX(ressources->settings_background, 13);
+    TX_CREATE(ressources->background, 0);
+    TX_CREATE(ressources->play_button, 1);
+    TX_CREATE(ressources->play_button_hover, 2);
+    TX_CREATE(ressources->quit_button, 3);
+    TX_CREATE(ressources->quit_button_hover, 4);
+    TX_CREATE(ressources->settings_button, 5);
+    TX_CREATE(ressources->settings_button_hover, 6);
+    TX_CREATE(ressources->sound_on_button, 7);
+    TX_CREATE(ressources->sound_on_button_hover, 8);
+    TX_CREATE(ressources->sound_off_button, 9);
+    TX_CREATE(ressources->sound_off_button_hover, 10);
+    TX_CREATE(ressources->back_button, 11);
+    TX_CREATE(ressources->back_button_hover, 12);
+    TX_CREATE(ressources->settings_background, 13);
     create_secondary_ressources(ressources);
     ressources->destroy_ressources = &destroy_ressources;
     return ressources;

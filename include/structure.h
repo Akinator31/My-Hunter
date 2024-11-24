@@ -14,14 +14,14 @@
     #include "../lib/my_lib/my.h"
     #define POS(x, y) ((sfVector2f){(x), (y)})
     #define AREA(x, y) ((sfIntRect){(x), (y)})
-    #define SFTX(res, i) res = sfTexture_createFromFile(assets[i], NULL)
-    #define SFMS(res, i) res = sfMusic_createFromFile(assets[i])
+    #define TX_CREATE(res, i) res = sfTexture_createFromFile(assets[i], NULL)
+    #define MUSIC_CREATE(res, i) res = sfMusic_createFromFile(assets[i])
     #define GET_RES(name) engine->ressources->name
     #define GET_SPRITE() ((entity_t *)(temp->data))->sprite
     #define MOUSE_RELEASED() engine->event.type == sfEvtMouseButtonReleased
     #define MOUSE_PRESSED() engine->event.type == sfEvtMouseButtonPressed
     #define IS_ENTITY(entity_id) ((entity_t *)(temp->data))->id == entity_id
-    #define IS_CLICK(sprite) is_mouse_on_sprite(engine, sprite, mouse_pos)
+    #define IS_CLICK(sprite) is_mouse_on_sprite(engine, sprite)
     #define SF_VECTOR_2U(x, y) ((sfVector2u){(x), (y)})
     #define SF_VECTOR_2I(x, y) ((sfVector2i){(x), (y)})
 
@@ -39,7 +39,12 @@ enum entity_state {
 enum game_state {
     RUNNING,
     PAUSED,
-    STOPED
+};
+
+enum which_music {
+    MENU_MUSIC,
+    GAME_MUSIC,
+    PAUSE,
 };
 
 enum music_state {
@@ -54,10 +59,11 @@ struct engine_s {
     linked_list_t *scenes_list;
     ressource_manager_t *ressources;
     sfEvent event;
-    bool is_running;
+    int state;
     float delta_time;
     int default_fps_framerate;
-    int music_playing;
+    int music_state;
+    int music_selector;
 };
 
 struct scene_s {
@@ -65,7 +71,7 @@ struct scene_s {
     linked_list_t *entity_list;
     int (*scene_update)(scene_t *scene, engine_t *engine);
     void (*scene_render)(scene_t *scene, engine_t *engine);
-    scene_t *(*scene_transition)(scene_t *current_scene, engine_t engine);
+    void (*scene_pause_update)(scene_t *scene, engine_t *engine);
     void (*scene_destroy)(scene_t *scene);
 };
 
@@ -102,6 +108,11 @@ struct ressource_manager_s {
     sfTexture *res_900_hover;
     sfTexture *res_1920_hover;
     sfTexture *res_4k_hover;
+    sfTexture *game_background;
+    sfTexture *pause_button;
+    sfTexture *pause_button_hover;
+    sfTexture *resume_button;
+    sfTexture *resume_button_hover;
     sfMusic *menu_music;
     sfMusic *game_music;
     void (*destroy_ressources)(ressource_manager_t *ressources);

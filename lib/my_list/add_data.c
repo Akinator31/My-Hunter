@@ -23,7 +23,6 @@ linked_list_t *push_front_list(linked_list_t *list, void *data)
 linked_list_t *push_front_list_all(linked_list_t *list, int nb, ...)
 {
     va_list args;
-    linked_list_t *temp;
 
     va_start(args, nb);
     for (int i = 0; i < nb; i++) {

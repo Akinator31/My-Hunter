@@ -14,8 +14,11 @@ sfRenderWindow *create_window(unsigned int width,
 void set_sprite_hover(sfSprite *sprite, engine_t *engine,
     sfTexture *new_texture, sfTexture *original_texture);
 sfBool is_mouse_on_sprite(engine_t *engine,
-    sfSprite *sprite, sfVector2i mouse_pos);
+    sfSprite *sprite);
 scene_t *get_scene_by_id(engine_t *engine, int id);
 void mute_or_unmute_music(engine_t *engine, int mute_or_unmute);
+void switch_game_music(engine_t *engine);
+void switch_menu_music(engine_t *engine);
+void switch_pause_music(engine_t *engine);
 
 #endif

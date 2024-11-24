@@ -18,7 +18,6 @@ engine_t *load_game(char *title, int width,
     unsigned int height, unsigned int default_framerate)
 {
     engine_t *engine = malloc(sizeof(*engine));
-    sfEvent event;
 
     engine->window = create_window(width, height, title);
     engine->clock = sfClock_create();
@@ -26,11 +25,11 @@ engine_t *load_game(char *title, int width,
     engine->scenes_list = NULL;
     engine->ressources = create_ressources();
     engine->scenes_list = load_scenes(engine);
-    engine->event = event;
-    engine->is_running = false;
+    engine->state = RUNNING;
     engine->delta_time = 0.0;
     engine->default_fps_framerate = default_framerate;
-    engine->music_playing = PLAYING;
+    engine->music_state = PLAYING;
+    engine->music_selector = MENU_MUSIC;
     sfRenderWindow_setFramerateLimit(engine->window,
         default_framerate);
     return engine;

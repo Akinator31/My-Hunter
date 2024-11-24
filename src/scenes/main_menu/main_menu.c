@@ -30,6 +30,7 @@ int update_button_hover_main(scene_t *scene, engine_t *engine)
 {
     linked_list_t *temp = scene->entity_list;
 
+    switch_menu_music(engine);
     while (temp != NULL) {
         if (IS_ENTITY(2))
             set_sprite_hover(GET_SPRITE(), engine,
@@ -42,12 +43,12 @@ int update_button_hover_main(scene_t *scene, engine_t *engine)
             GET_RES(settings_button_hover), GET_RES(settings_button));
         temp = temp->next;
     }
+    return 1;
 }
 
 int update_main_page(scene_t *scene, engine_t *engine)
 {
     linked_list_t *temp = scene->entity_list;
-    sfVector2i mouse_pos = sfMouse_getPositionRenderWindow(engine->window);
 
     update_button_hover_main(scene, engine);
     while (temp != NULL) {
@@ -59,6 +60,9 @@ int update_main_page(scene_t *scene, engine_t *engine)
             sfRenderWindow_close(engine->window);
             return 84;
         }
+        if (MOUSE_PRESSED() && IS_ENTITY(2) &&
+            IS_CLICK(((entity_t *)(temp->data))->sprite))
+                engine->current_scene = get_scene_by_id(engine, 3);
         temp = temp->next;
     }
 }
