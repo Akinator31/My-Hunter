@@ -87,10 +87,10 @@ scene_t *init_main_page(engine_t *engine)
     sfMusic_setLoop(GET_RES(menu_music), sfTrue);
     sfMusic_play(GET_RES(menu_music));
     entity_list = push_front_list_all(entity_list, 4,
-        create_entity(GET_RES(play_button), POS(150, 800), 2),
-        create_entity(GET_RES(quit_button), POS(1736, 30), 3),
-        create_entity(GET_RES(settings_button), POS(500, 800), 4),
-        create_entity(GET_RES(background), POS(0, 0), 1));
+        create_entity(GET_RES(play_button), POS(150, 800), 2, NULL),
+        create_entity(GET_RES(quit_button), POS(1736, 30), 3, NULL),
+        create_entity(GET_RES(settings_button), POS(500, 800), 4, NULL),
+        create_entity(GET_RES(background), POS(0, 0), 1, NULL));
     main_scene->id = 1;
     main_scene->entity_list = entity_list;
     main_scene->scene_render = &render_main_page;

@@ -30,6 +30,7 @@ UTILS =	src/utils/create_window.c \
 		src/utils/mute_or_unmute_music.c \
 		src/utils/switch_music.c \
 		src/utils/help_display.c \
+		src/utils/get_random_pos.c \
 
 OBJ = 	$(SRC:.c=.o) $(SCENES:.c=.o) $(RESSOURCES:.c=.o) \
 		$(EVENT:.c=.o) $(ENTITY:.c=.o) $(UTILS:.c=.o)

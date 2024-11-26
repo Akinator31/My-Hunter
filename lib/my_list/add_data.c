@@ -31,3 +31,19 @@ linked_list_t *push_front_list_all(linked_list_t *list, int nb, ...)
     va_end(args);
     return list;
 }
+
+linked_list_t *push_back_list(linked_list_t *list, void *data)
+{
+    linked_list_t *new_element = malloc(sizeof(linked_list_t));
+    linked_list_t *temp = list;
+    linked_list_t *prev;
+
+    while (temp != NULL) {
+        prev = temp;
+        temp = temp->next;
+    }
+    new_element->data = data;
+    new_element->next = NULL;
+    prev->next = new_element;
+    return list;
+}

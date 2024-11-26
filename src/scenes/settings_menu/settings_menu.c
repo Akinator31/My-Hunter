@@ -108,12 +108,14 @@ scene_t *init_settings_page(engine_t *engine)
     scene_t *main_scene = malloc(sizeof(scene_t));
 
     entity_list = push_front_list_all(entity_list, 6,
-        create_entity(engine->ressources->res_4k, POS(285, 900), 6),
-        create_entity(engine->ressources->res_1920, POS(475, 700), 5),
-        create_entity(engine->ressources->res_900, POS(100, 700), 4),
-        create_entity(engine->ressources->back_button, POS(1736, 30), 3),
-        create_entity(engine->ressources->sound_on_button, POS(100, 500), 2),
-        create_entity(engine->ressources->settings_background, POS(0, 0), 1));
+        create_entity(engine->ressources->res_4k, POS(285, 900), 6, NULL),
+        create_entity(engine->ressources->res_1920, POS(475, 700), 5, NULL),
+        create_entity(engine->ressources->res_900, POS(100, 700), 4, NULL),
+        create_entity(engine->ressources->back_button, POS(1736, 30), 3, NULL),
+        create_entity(engine->ressources->sound_on_button,
+            POS(100, 500), 2, NULL),
+        create_entity(engine->ressources->settings_background,
+            POS(0, 0), 1, NULL));
     main_scene->id = 2;
     main_scene->entity_list = entity_list;
     main_scene->scene_render = &render_settings_page;

@@ -7,6 +7,7 @@
 
 #include <stdlib.h>
 #include <SFML/Graphics.h>
+#include "../../include/engine.h"
 #include "../../lib/my_lib/my.h"
 #include "../../include/my_hunter.h"
 #include "../../include/structure.h"
@@ -14,12 +15,24 @@
 #include "../../include/scenes.h"
 #include "../../include/utils.h"
 
-engine_t *load_game(char *title, int width,
-    unsigned int height, unsigned int default_framerate)
+int tty_checker(char **envp)
+{
+    for (int i = 0; envp[i] != NULL; i++) {
+        if ((envp[i][0] == 'D') && (envp[i][1] == 'I') && envp[i][2] == 'S')
+            return 1;
+    }
+    return 0;
+}
+
+engine_t *load_game(unsigned int default_framerate, char **envp)
 {
     engine_t *engine = malloc(sizeof(*engine));
 
-    engine->window = create_window(width, height, title);
+    if (!tty_checker(envp)) {
+        free(engine);
+        return NULL;
+    }
+    engine->window = create_window(WIDTH, HEIGTH, NAME);
     engine->clock = sfClock_create();
     engine->current_scene = NULL;
     engine->scenes_list = NULL;
@@ -48,6 +61,8 @@ void clean_scene(linked_list_t *list)
 
 int engine_destroy(engine_t *engine)
 {
+    if (engine == NULL)
+        return 84;
     clean_scene(engine->scenes_list);
     sfRenderWindow_destroy(engine->window);
     sfClock_destroy(engine->clock);

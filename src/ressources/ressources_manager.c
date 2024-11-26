@@ -36,6 +36,7 @@ static const char *assets[] = {
     "assets/images/game_scene/buttons/hover/pause_hover.png",
     "assets/images/game_scene/buttons/play.png",
     "assets/images/game_scene/buttons/hover/play_hover.png",
+    "assets/images/game_scene/chicken_sprite_sheet.png",
     "assets/sounds/menu-music.ogg",
     "assets/sounds/game-music.ogg",
 };
@@ -53,6 +54,7 @@ void destroy_secondary_ressources(ressource_manager_t *ressources)
     sfTexture_destroy(ressources->pause_button_hover);
     sfTexture_destroy(ressources->resume_button);
     sfTexture_destroy(ressources->resume_button_hover);
+    sfTexture_destroy(ressources->chicken);
 }
 
 void destroy_ressources(ressource_manager_t *ressources)
@@ -89,8 +91,9 @@ void create_secondary_ressources(ressource_manager_t *ressources)
     TX_CREATE(ressources->pause_button_hover, 22);
     TX_CREATE(ressources->resume_button, 23);
     TX_CREATE(ressources->resume_button_hover, 24);
-    MUSIC_CREATE(ressources->menu_music, 25);
-    MUSIC_CREATE(ressources->game_music, 26);
+    TX_CREATE(ressources->chicken, 25);
+    MUSIC_CREATE(ressources->menu_music, 26);
+    MUSIC_CREATE(ressources->game_music, 27);
 }
 
 ressource_manager_t *create_ressources(void)

@@ -69,6 +69,7 @@ struct engine_s {
 struct scene_s {
     int id;
     linked_list_t *entity_list;
+    sfClock *clock;
     int (*scene_update)(scene_t *scene, engine_t *engine);
     void (*scene_render)(scene_t *scene, engine_t *engine);
     void (*scene_pause_update)(scene_t *scene, engine_t *engine);
@@ -80,6 +81,7 @@ struct entity_s {
     sfVector2f pos;
     int velocity;
     int id;
+    sfClock *clock;
     void (*entity_init)(entity_t *entity, scene_t *scene, engine_t *engine);
     void (*entity_update)(entity_t *entity, scene_t *scene, engine_t *engine);
     void (*entity_render)(entity_t *entity, engine_t *engine);
@@ -113,6 +115,7 @@ struct ressource_manager_s {
     sfTexture *pause_button_hover;
     sfTexture *resume_button;
     sfTexture *resume_button_hover;
+    sfTexture *chicken;
     sfMusic *menu_music;
     sfMusic *game_music;
     void (*destroy_ressources)(ressource_manager_t *ressources);

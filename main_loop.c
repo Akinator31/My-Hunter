@@ -8,6 +8,7 @@
 #include <SFML/Graphics.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <time.h>
 #include "include/my_hunter.h"
 #include "include/structure.h"
 #include "include/engine.h"
@@ -15,14 +16,13 @@
 #include "include/event.h"
 #include "include/utils.h"
 
-int main(int ac, char **av)
+int main(int ac, char **av, char **envp)
 {
-    engine_t *engine;
+    engine_t *engine = load_game(60, envp);
 
     if (ac > 1)
         return help(ac, av);
-    engine = load_game(NAME, WIDTH, HEIGTH, 60);
-    while (sfRenderWindow_isOpen(engine->window)) {
+    while ((engine != NULL) && sfRenderWindow_isOpen(engine->window)) {
         sfRenderWindow_clear(engine->window, sfBlack);
         load_current_scene(engine);
         if (engine->state == PAUSED)
