@@ -94,7 +94,7 @@ static void update_chicken(entity_t *entity, scene_t *scene, engine_t *engine)
     animate_chicken(entity);
     set_chicken_vector(entity);
     move_chicken(entity);
-    manage_chicken_click(entity, engine, scene);
+    manage_chicken_click(entity, engine);
 }
 
 static void create_chicken_each_frame(scene_t *scene, engine_t *engine)
