@@ -5,8 +5,8 @@
 ** get_scene_by_id
 */
 
-#include "../../include/structure.h"
-#include "../../include/engine.h"
+#include "structure.h"
+#include "engine.h"
 
 scene_t *get_scene_by_id(engine_t *engine, int id)
 {

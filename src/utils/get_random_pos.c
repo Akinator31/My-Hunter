@@ -5,8 +5,8 @@
 ** get_random_pos
 */
 
-#include "../../include/structure.h"
-#include "../../include/engine.h"
+#include "structure.h"
+#include "engine.h"
 
 sfVector2f get_random_pos(engine_t *engine)
 {

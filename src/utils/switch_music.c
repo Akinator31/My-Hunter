@@ -5,8 +5,8 @@
 ** switch_music
 */
 
-#include "../../include/structure.h"
-#include "../../include/engine.h"
+#include "structure.h"
+#include "engine.h"
 
 void switch_pause_music(engine_t *engine)
 {

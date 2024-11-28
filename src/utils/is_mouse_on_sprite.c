@@ -5,8 +5,8 @@
 ** is_mouse_on_sprite
 */
 
-#include "../../include/structure.h"
-#include "../../include/engine.h"
+#include "structure.h"
+#include "engine.h"
 #include <stdio.h>
 
 sfBool is_mouse_on_sprite(engine_t *engine,

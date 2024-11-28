@@ -46,5 +46,7 @@ char *my_strdup(char const *src);
 int my_get_nb_length(int nb);
 void *my_memcpy(void *dest, const void *src, size_t size);
 void *my_memset(void *pointer, int value, size_t size);
+int the_small_int(int nb);
+char *my_strnum(int nb);
 
 #endif

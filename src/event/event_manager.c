@@ -6,10 +6,10 @@
 */
 
 #include <SFML/Graphics.h>
-#include "../../include/my_hunter.h"
-#include "../../include/structure.h"
-#include "../../include/utils.h"
-#include "../../include/event.h"
+#include "my_hunter.h"
+#include "structure.h"
+#include "utils.h"
+#include "event.h"
 
 void manage_music_button_hover(engine_t *engine, entity_t *entity)
 {

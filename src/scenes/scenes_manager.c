@@ -6,7 +6,7 @@
 */
 
 #include <SFML/Graphics.h>
-#include "../../include/scenes.h"
+#include "scenes.h"
 #include <stdio.h>
 
 linked_list_t *load_scenes(engine_t *engine)

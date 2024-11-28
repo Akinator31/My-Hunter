@@ -7,12 +7,12 @@
 
 #include <SFML/Graphics.h>
 #include <stdlib.h>
-#include "../../../include/my_hunter.h"
-#include "../../../include/structure.h"
-#include "../../../include/entity.h"
-#include "../../../include/my_list.h"
-#include "../../../include/event.h"
-#include "../../../include/utils.h"
+#include "my_hunter.h"
+#include "structure.h"
+#include "entity.h"
+#include "my_list.h"
+#include "event.h"
+#include "utils.h"
 
 static void render_settings_page(scene_t *scene, engine_t *engine)
 {

@@ -5,8 +5,8 @@
 ** mute_or_unmute_music
 */
 
-#include "../../include/structure.h"
-#include "../../include/engine.h"
+#include "structure.h"
+#include "engine.h"
 
 void mute_or_unmute_music(engine_t *engine, int mute_or_unmute)
 {

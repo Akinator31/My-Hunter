@@ -9,12 +9,12 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <time.h>
-#include "include/my_hunter.h"
-#include "include/structure.h"
-#include "include/engine.h"
-#include "include/scenes.h"
-#include "include/event.h"
-#include "include/utils.h"
+#include "my_hunter.h"
+#include "structure.h"
+#include "engine.h"
+#include "scenes.h"
+#include "event.h"
+#include "utils.h"
 
 int main(int ac, char **av, char **envp)
 {

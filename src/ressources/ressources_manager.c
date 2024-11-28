@@ -7,8 +7,8 @@
 
 #include <SFML/Graphics.h>
 #include <stdlib.h>
-#include "../../include/my_hunter.h"
-#include "../../include/structure.h"
+#include "my_hunter.h"
+#include "structure.h"
 
 static const char *assets[] = {
     "assets/images/main_menu/bg.png",
@@ -39,6 +39,7 @@ static const char *assets[] = {
     "assets/images/game_scene/chicken_sprite_sheet_1.png",
     "assets/sounds/menu-music.mp3",
     "assets/sounds/game-music.mp3",
+    "assets/fonts/BungeeSpice-Regular.ttf"
 };
 
 void destroy_secondary_ressources(ressource_manager_t *ressources)
@@ -55,6 +56,7 @@ void destroy_secondary_ressources(ressource_manager_t *ressources)
     sfTexture_destroy(ressources->resume_button);
     sfTexture_destroy(ressources->resume_button_hover);
     sfTexture_destroy(ressources->chicken);
+    sfFont_destroy(ressources->font);
 }
 
 void destroy_ressources(ressource_manager_t *ressources)
@@ -94,6 +96,7 @@ void create_secondary_ressources(ressource_manager_t *ressources)
     TX_CREATE(ressources->chicken, 25);
     MUSIC_CREATE(ressources->menu_music, 26);
     MUSIC_CREATE(ressources->game_music, 27);
+    ressources->font = sfFont_createFromFile(assets[28]);
 }
 
 ressource_manager_t *create_ressources(void)

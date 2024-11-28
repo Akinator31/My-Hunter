@@ -5,8 +5,8 @@
 ** set_sprite_hover
 */
 
-#include "../../include/structure.h"
-#include "../../include/engine.h"
+#include "structure.h"
+#include "engine.h"
 
 void set_sprite_hover(sfSprite *sprite, engine_t *engine,
     sfTexture *new_texture, sfTexture *original_texture)

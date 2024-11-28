@@ -64,6 +64,7 @@ struct engine_s {
     int default_fps_framerate;
     int music_state;
     int music_selector;
+    int score;
 };
 
 struct scene_s {
@@ -83,6 +84,8 @@ struct entity_s {
     double direction_angle;
     int id;
     int state;
+    int is_text;
+    sfText *text;
     sfClock *clock;
     void (*entity_init)(entity_t *entity, scene_t *scene, engine_t *engine);
     void (*entity_update)(entity_t *entity, scene_t *scene, engine_t *engine);
@@ -120,6 +123,7 @@ struct ressource_manager_s {
     sfTexture *chicken;
     sfMusic *menu_music;
     sfMusic *game_music;
+    sfFont *font;
     void (*destroy_ressources)(ressource_manager_t *ressources);
 };
 

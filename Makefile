@@ -44,7 +44,7 @@ all: $(NAME)
 
 CFLAGS += -lcsfml-audio -lcsfml-graphics -lcsfml-system
 CFLAGS += -lcsfml-window -lcsfml-network -fsanitize=address -g3
-CFLAGS += -Wextra -Wall -lm
+CFLAGS += -Wextra -Wall -lm -Iinclude
 $(NAME): $(OBJ)
 		make -C lib/my_lib
 		gcc -o $(NAME) $(OBJ) $(LIB) $(CFLAGS)

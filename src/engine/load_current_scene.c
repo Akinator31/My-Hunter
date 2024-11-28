@@ -5,8 +5,8 @@
 ** load_current_scene
 */
 
-#include "../../include/engine.h"
-#include "../../include/structure.h"
+#include "engine.h"
+#include "structure.h"
 
 void load_current_scene(engine_t *engine)
 {

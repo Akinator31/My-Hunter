@@ -7,13 +7,13 @@
 
 #include <SFML/Graphics.h>
 #include <stdlib.h>
-#include "../../../include/my_hunter.h"
-#include "../../../include/structure.h"
-#include "../../../include/entity.h"
-#include "../../../include/my_list.h"
-#include "../../../include/event.h"
-#include "../../../include/utils.h"
-#include "../../../include/engine.h"
+#include "my_hunter.h"
+#include "structure.h"
+#include "entity.h"
+#include "my_list.h"
+#include "event.h"
+#include "utils.h"
+#include "engine.h"
 
 void render_main_page(scene_t *scene, engine_t *engine)
 {
@@ -97,6 +97,8 @@ scene_t *init_main_page(engine_t *engine)
     main_scene->scene_render = &render_main_page;
     main_scene->scene_update = &update_main_page;
     main_scene->scene_destroy = &destroy_main_page;
+    engine->state = RUNNING;
+    engine->score = 0;
     engine->current_scene = main_scene;
     return main_scene;
 }

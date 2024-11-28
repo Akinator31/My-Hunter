@@ -6,8 +6,8 @@
 */
 
 #include <unistd.h>
-#include "../../include/structure.h"
-#include "../../include/utils.h"
+#include "structure.h"
+#include "utils.h"
 
 static const char *help_message = "=============================\n"
     "       KFC HUNTER GAME       \n"

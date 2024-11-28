@@ -7,13 +7,13 @@
 
 #include <stdlib.h>
 #include <SFML/Graphics.h>
-#include "../../include/engine.h"
+#include "engine.h"
 #include "../../lib/my_lib/my.h"
-#include "../../include/my_hunter.h"
-#include "../../include/structure.h"
-#include "../../include/ressources.h"
-#include "../../include/scenes.h"
-#include "../../include/utils.h"
+#include "my_hunter.h"
+#include "structure.h"
+#include "ressources.h"
+#include "scenes.h"
+#include "utils.h"
 
 int tty_checker(char **envp)
 {
