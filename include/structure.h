@@ -80,7 +80,9 @@ struct entity_s {
     sfSprite *sprite;
     sfVector2f pos;
     int velocity;
+    double direction_angle;
     int id;
+    int state;
     sfClock *clock;
     void (*entity_init)(entity_t *entity, scene_t *scene, engine_t *engine);
     void (*entity_update)(entity_t *entity, scene_t *scene, engine_t *engine);

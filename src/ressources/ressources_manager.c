@@ -36,9 +36,9 @@ static const char *assets[] = {
     "assets/images/game_scene/buttons/hover/pause_hover.png",
     "assets/images/game_scene/buttons/play.png",
     "assets/images/game_scene/buttons/hover/play_hover.png",
-    "assets/images/game_scene/chicken_sprite_sheet.png",
-    "assets/sounds/menu-music.ogg",
-    "assets/sounds/game-music.ogg",
+    "assets/images/game_scene/chicken_sprite_sheet_1.png",
+    "assets/sounds/menu-music.mp3",
+    "assets/sounds/game-music.mp3",
 };
 
 void destroy_secondary_ressources(ressource_manager_t *ressources)

@@ -26,6 +26,7 @@ entity_t *create_entity(sfTexture *texture, sfVector2f pos, int id,
     entity->id = id;
     entity->entity_destroy = &destroy_entity;
     entity->entity_update = entity_update;
+    entity->state = ACTIVE;
     entity->clock = sfClock_create();
     sfSprite_setTexture(entity->sprite, texture, sfFalse);
     sfSprite_setTextureRect(entity->sprite,

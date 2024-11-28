@@ -8,6 +8,7 @@
 #include <SFML/Graphics.h>
 #include <stdlib.h>
 #include <time.h>
+#include <math.h>
 #include "../../../include/my_hunter.h"
 #include "../../../include/structure.h"
 #include "../../../include/entity.h"
@@ -22,8 +23,9 @@ void render_game_scene(scene_t *scene, engine_t *engine)
     linked_list_t *temp = scene->entity_list;
 
     while (temp != NULL) {
-        sfRenderWindow_drawSprite(engine->window,
-            ((entity_t *)temp->data)->sprite, NULL);
+        if (((entity_t *)temp->data)->state == ACTIVE)
+            sfRenderWindow_drawSprite(engine->window,
+                ((entity_t *)temp->data)->sprite, NULL);
         temp = temp->next;
     }
 }
@@ -42,27 +44,57 @@ void update_pause_game(scene_t *scene, engine_t *engine)
     }
 }
 
-static void move_chicken(entity_t *entity, sfIntRect *rect)
+static void animate_chicken(entity_t *entity)
 {
-    if (rect->left < 1160)
-        rect->left += 580;
-    else {
-        rect->left = 0;
+    sfIntRect rect = sfSprite_getTextureRect(entity->sprite);
+
+    rect.height = 260;
+    rect.width = 300;
+    if (sfTime_asSeconds(sfClock_getElapsedTime(entity->clock)) > 0.2) {
+        if (rect.left < 600)
+            rect.left += 300;
+        else {
+            rect.left = 0;
+        }
+        sfClock_restart(entity->clock);
     }
-    sfSprite_setTextureRect(entity->sprite, *rect);
+    sfSprite_setTextureRect(entity->sprite, rect);
+}
+
+static void set_chicken_vector(entity_t *entity)
+{
+    sfVector2f entity_pos = sfSprite_getPosition(entity->sprite);
+
+    if (entity->direction_angle == 0) {
+        if ((entity_pos.x < 0) && (entity_pos.y < 0)) {
+            entity->direction_angle = rand() % 90;
+            return;
+        }
+        if ((entity_pos.x > 0) && (entity_pos.y < 0)) {
+            entity->direction_angle = rand() % 180;
+            return;
+        }
+        if ((entity_pos.x > 0) && (entity_pos.y > 0)) {
+            entity->direction_angle = rand() % 180;
+            return;
+        }
+    }
+}
+
+static void move_chicken(entity_t *entity)
+{
+    sfVector2f new_pos = {10 * cos(entity->direction_angle),
+        10 * sin(entity->direction_angle)};
+
+    sfSprite_move(entity->sprite, new_pos);
 }
 
 static void update_chicken(entity_t *entity, scene_t *scene, engine_t *engine)
 {
-    sfIntRect rect = sfSprite_getTextureRect(entity->sprite);
-
-    rect.height = 502;
-    rect.width = 580;
-    if (sfTime_asSeconds(sfClock_getElapsedTime(entity->clock)) > 0.2) {
-        move_chicken(entity, &rect);
-        sfClock_restart(entity->clock);
-    }
-    sfSprite_setTextureRect(entity->sprite, rect);
+    animate_chicken(entity);
+    set_chicken_vector(entity);
+    move_chicken(entity);
+    manage_chicken_click(entity, engine, scene);
 }
 
 static void create_chicken_each_frame(scene_t *scene, engine_t *engine)
@@ -70,9 +102,10 @@ static void create_chicken_each_frame(scene_t *scene, engine_t *engine)
     linked_list_t *temp;
     entity_t *duck;
 
-    if (sfTime_asSeconds(sfClock_getElapsedTime(scene->clock)) > 1) {
+    if (sfTime_asSeconds(sfClock_getElapsedTime(scene->clock)) > 0.2) {
         duck = create_entity(GET_RES(chicken),
             get_random_pos(engine), 84, update_chicken);
+        duck->direction_angle = 0;
         scene->entity_list = push_back_list(scene->entity_list, duck);
         sfClock_restart(scene->clock);
     }
@@ -81,20 +114,6 @@ static void create_chicken_each_frame(scene_t *scene, engine_t *engine)
         if (((entity_t *)(temp->data))->id == 84) {
             ((entity_t *)(temp->data))->
                 entity_update(temp->data, scene, engine);
-        }
-        temp = temp->next;
-    }
-}
-
-static void clear_list_where_id(linked_list_t *list, int id)
-{
-    linked_list_t *temp = list;
-    linked_list_t *current;
-
-    while (temp != NULL) {
-        if (((entity_t *)(temp->data))->id == 84) {
-            current = temp;
-            temp = pop_front_list(current, &free);
         }
         temp = temp->next;
     }
@@ -122,7 +141,7 @@ int update_game_scene(scene_t *scene, engine_t *engine)
     return 1;
 }
 
-void destroy_game_scene(scene_t *scene)
+static void destroy_game_scene(scene_t *scene)
 {
     linked_list_t *temp = scene->entity_list;
 

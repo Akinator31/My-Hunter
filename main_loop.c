@@ -18,10 +18,11 @@
 
 int main(int ac, char **av, char **envp)
 {
-    engine_t *engine = load_game(60, envp);
+    engine_t *engine;
 
     if (ac > 1)
         return help(ac, av);
+    engine = load_game(60, envp);
     while ((engine != NULL) && sfRenderWindow_isOpen(engine->window)) {
         sfRenderWindow_clear(engine->window, sfBlack);
         load_current_scene(engine);

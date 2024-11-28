@@ -65,6 +65,7 @@ int update_main_page(scene_t *scene, engine_t *engine)
                 engine->current_scene = get_scene_by_id(engine, 3);
         temp = temp->next;
     }
+    return 0;
 }
 
 void destroy_main_page(scene_t *scene)

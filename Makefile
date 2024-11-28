@@ -22,6 +22,7 @@ ENTITY = 	src/entity/entity.c \
 RESSOURCES = 	src/ressources/ressources_manager.c \
 
 EVENT = 	src/event/event_manager.c \
+			src/event/chicken_event/chicken_click.c \
 
 UTILS =	src/utils/create_window.c \
 		src/utils/set_sprite_hover.c \
@@ -43,25 +44,14 @@ all: $(NAME)
 
 CFLAGS += -lcsfml-audio -lcsfml-graphics -lcsfml-system
 CFLAGS += -lcsfml-window -lcsfml-network -fsanitize=address -g3
-CFLAGS += -Wextra -Wall
+CFLAGS += -Wextra -Wall -lm
 $(NAME): $(OBJ)
 		make -C lib/my_lib
 		gcc -o $(NAME) $(OBJ) $(LIB) $(CFLAGS)
 
 clean:
+	find . -type f -name "*.o" -delete
 	make clean -C lib/my_lib
-	rm -f *.o
-	rm -f src/scenes/main_menu/*.o
-	rm -f src/scenes/game/*.o
-	rm -f src/scenes/pause_menu/*.o
-	rm -f src/scenes/settings_menu/*.o
-	rm -f src/scenes/*.o
-	rm -f src/engine/*.o
-	rm -f src/entity/*.o
-	rm -f src/event/*.o
-	rm -f src/ressources/*.o
-	rm -f src/utils/*.o
-	rm -f lib/my_list/*.o
 
 fclean: clean
 
