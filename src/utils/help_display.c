@@ -7,6 +7,7 @@
 
 #include <unistd.h>
 #include "structure.h"
+#include "my_lib.h"
 #include "utils.h"
 
 static const char *help_message = "=============================\n"

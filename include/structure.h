@@ -11,7 +11,7 @@
     #include <SFML/Audio.h>
     #include <stdbool.h>
     #include "my_list.h"
-    #include "../lib/my_lib/my.h"
+    #include "my_lib.h"
     #define POS(x, y) ((sfVector2f){(x), (y)})
     #define AREA(x, y) ((sfIntRect){(x), (y)})
     #define TX_CREATE(res, i) res = sfTexture_createFromFile(assets[i], NULL)
@@ -121,6 +121,7 @@ struct ressource_manager_s {
     sfTexture *resume_button;
     sfTexture *resume_button_hover;
     sfTexture *chicken;
+    sfTexture *special;
     sfMusic *menu_music;
     sfMusic *game_music;
     sfFont *font;

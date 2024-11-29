@@ -5,10 +5,11 @@
 ** chicken_click
 */
 
+#include <stdlib.h>
 #include "structure.h"
 #include "event.h"
 #include "entity.h"
-#include "../../../lib/my_lib/my.h"
+#include "my_lib.h"
 
 static void update_score(scene_t *scene, engine_t *engine, entity_t *entity)
 {

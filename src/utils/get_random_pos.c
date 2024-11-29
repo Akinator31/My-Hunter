@@ -5,6 +5,7 @@
 ** get_random_pos
 */
 
+#include <stdlib.h>
 #include "structure.h"
 #include "engine.h"
 

@@ -5,7 +5,7 @@
 ** task07
 */
 
-#include "my.h"
+#include "my_lib.h"
 #include <stdlib.h>
 
 int compute(int nb, char *buffer, int counter_digits, int divider)

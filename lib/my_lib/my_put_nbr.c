@@ -5,7 +5,7 @@
 ** task07
 */
 
-#include "my.h"
+#include "my_lib.h"
 
 int the_small_int(int nb)
 {
@@ -47,4 +47,5 @@ int my_put_nbr(int nb)
             divider /= 10;
         }
     }
+    return 0;
 }

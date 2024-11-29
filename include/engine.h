@@ -7,7 +7,7 @@
 
 #ifndef INCLUDED_ENGINE_H
     #define INCLUDED_ENGINE_H
-    #include "../lib/my_lib/my.h"
+    #include "my_lib.h"
     #include "my_hunter.h"
     #include "structure.h"
     #include "ressources.h"

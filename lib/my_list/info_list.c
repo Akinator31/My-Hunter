@@ -7,7 +7,7 @@
 
 #include <stdlib.h>
 #include "../../include/my_list.h"
-#include "../my_lib/my.h"
+#include "my_lib.h"
 
 linked_list_t *new_list(void)
 {

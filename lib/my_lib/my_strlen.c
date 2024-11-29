@@ -9,7 +9,7 @@ int my_strlen(char const *str)
 {
     int size = 0;
 
-    for (str; *str != '\0'; str++)
+    for (int i = 0; str[i] != '\0'; str++)
         size++;
     return size;
 }

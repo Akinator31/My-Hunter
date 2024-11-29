@@ -16,6 +16,7 @@ SCENES =	src/scenes/scenes_manager.c \
 			src/scenes/main_menu/main_menu.c \
 			src/scenes/settings_menu/settings_menu.c \
 			src/scenes/game/game_scene.c \
+			src/scenes/game/chicken.c \
 
 ENTITY = 	src/entity/entity.c \
 
@@ -33,10 +34,16 @@ UTILS =	src/utils/create_window.c \
 		src/utils/help_display.c \
 		src/utils/get_random_pos.c \
 
-OBJ = 	$(SRC:.c=.o) $(SCENES:.c=.o) $(RESSOURCES:.c=.o) \
-		$(EVENT:.c=.o) $(ENTITY:.c=.o) $(UTILS:.c=.o)
+LIB = 	lib/my_lib/my_put_nbr.c \
+		lib/my_lib/my_strcmp.c \
+		lib/my_lib/my_strlowcase.c \
+		lib/my_lib/my_strnum.c \
+		lib/my_lib/my_putchar.c \
+		lib/my_lib/my_strlen.c \
 
-LIB = lib/my_lib/libmy.a
+OBJ = 	$(SRC:.c=.o) $(SCENES:.c=.o) $(RESSOURCES:.c=.o) \
+		$(EVENT:.c=.o) $(ENTITY:.c=.o) $(UTILS:.c=.o) \
+		$(LIB:.c=.o)
 
 NAME = my_hunter
 
@@ -46,12 +53,10 @@ CFLAGS += -lcsfml-audio -lcsfml-graphics -lcsfml-system
 CFLAGS += -lcsfml-window -lcsfml-network -fsanitize=address -g3
 CFLAGS += -Wextra -Wall -lm -Iinclude
 $(NAME): $(OBJ)
-		make -C lib/my_lib
-		gcc -o $(NAME) $(OBJ) $(LIB) $(CFLAGS)
+		gcc -o $(NAME) $(OBJ) $(CFLAGS)
 
 clean:
 	find . -type f -name "*.o" -delete
-	make clean -C lib/my_lib
 
 fclean: clean
 
