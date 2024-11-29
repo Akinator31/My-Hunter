@@ -50,7 +50,7 @@ NAME = my_hunter
 all: $(NAME)
 
 CFLAGS += -lcsfml-audio -lcsfml-graphics -lcsfml-system
-CFLAGS += -lcsfml-window -lcsfml-network -fsanitize=address -g3
+CFLAGS += -lcsfml-window -lcsfml-network
 CFLAGS += -Wextra -Wall -lm -Iinclude
 $(NAME): $(OBJ)
 		gcc -o $(NAME) $(OBJ) $(CFLAGS)
