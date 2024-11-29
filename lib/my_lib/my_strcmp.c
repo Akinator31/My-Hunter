@@ -25,13 +25,9 @@ int my_strcmp(char *s1, char *s2)
     for (int i = 0; (test1[i] != '\0') || (test2[i] != '\0'); i++) {
         if (test1[i] != test2[i]) {
             result = test1[i] - test2[i];
-            free(test1);
-            free(test2);
             return result;
         }
     }
     result = test1[i] != test2[i];
-    free(test1);
-    free(test2);
     return result;
 }

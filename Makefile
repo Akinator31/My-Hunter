@@ -5,7 +5,7 @@
 ## Makefile for my_printf project
 ##
 
-SRC =	main_loop.c \
+SRC =	src/main_loop.c \
 		src/engine/engine.c \
 		src/engine/load_current_scene.c \
 		lib/my_list/add_data.c \
@@ -50,7 +50,7 @@ NAME = my_hunter
 all: $(NAME)
 
 CFLAGS += -lcsfml-audio -lcsfml-graphics -lcsfml-system
-CFLAGS += -lcsfml-window -lcsfml-network
+CFLAGS += -lcsfml-window -lcsfml-network -g3
 CFLAGS += -Wextra -Wall -lm -Iinclude
 $(NAME): $(OBJ)
 		gcc -o $(NAME) $(OBJ) $(CFLAGS)
