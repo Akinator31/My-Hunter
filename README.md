@@ -45,7 +45,6 @@ make
 2. Controls:
    - Use mouse to aim
    - Left click to shoot chickens
-   - ESC to pause/resume
    - Click settings button to change resolution
 
 ## 🛠️ Technical Details
